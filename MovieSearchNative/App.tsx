@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import MovieSearch from './components/MovieSearch';
-import SearchBar from './components/SearchBar';
 
 export default function App() {
   return (

@@ -1,9 +1,9 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import DisplayMovies from "./DisplayMovies";
 import { Movie } from "../interfaces/Movie";
-import MovieComponent from "./MovieComponent";
 import SearchBar from "./SearchBar";
+import { FontAwesome5 } from '@expo/vector-icons'
 
 export default function MovieSearch() {
   const movieList: Movie[] = [];
@@ -47,9 +47,18 @@ export default function MovieSearch() {
   movieList.push(fakeMovie2);
 
   return (
-    <View>
+    <View style={styles.container}>
+      <FontAwesome5 style={styles.historyIcon} name="history" size={24} color="white" />
       <SearchBar/>
       <DisplayMovies movieList={movieList} />
     </View>
   );
 }
+const styles = StyleSheet.create({
+  container:  {
+    
+  },
+  historyIcon: {
+    marginLeft: 350
+  },
+});
