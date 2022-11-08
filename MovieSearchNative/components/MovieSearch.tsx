@@ -1,13 +1,14 @@
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import DisplayMovies from "./DisplayMovies";
 import { Movie } from "../interfaces/Movie";
 import SearchBar from "./SearchBar";
 import { Octicons } from "@expo/vector-icons";
-import { Row } from "react-bootstrap";
 import Pagination from "./Pagination";
 
 export default function MovieSearch() {
+  const [showSearches, setShowSearches] = useState(false)
+
   const movieList: Movie[] = [];
   const fakeMovie: Movie = {
     Series_Title: "Kill Buljo",
@@ -56,22 +57,38 @@ export default function MovieSearch() {
   movieList.push(fakeMovie);
   movieList.push(fakeMovie2);
 
+  const onPressHistory = () => {
+    setShowSearches(!showSearches);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.searchBar}>
-        <Octicons
+    {showSearches ? (
+      <Octicons
+          onPress={onPressHistory}
           name="history"
           size={35}
           color="white"
         />
-        <SearchBar />
-      </View>
-      <ScrollView  style={styles.movies} >
-        <DisplayMovies movieList={movieList} />
-      </ScrollView>
-      <View style={styles.pagination}>
-      <Pagination/>
-      </View>
+    ) : (
+      <>
+        <View style={styles.searchBar}>
+          <Octicons
+            onPress={onPressHistory}
+            name="history"
+            size={35}
+            color="white"
+          />
+          <SearchBar />
+        </View>
+        <ScrollView  style={styles.movies} >
+          <DisplayMovies movieList={movieList} />
+        </ScrollView>
+        <View style={styles.pagination}>
+        <Pagination/>
+        </View>
+      </>
+      )}
     </SafeAreaView>
   );
 }

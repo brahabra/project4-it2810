@@ -3,12 +3,10 @@ import {
   Text,
   StyleSheet,
   Image,
-  SafeAreaView,
-  TextInput,
-  Button,
 } from "react-native";
 import React, { useState } from "react";
 import { Movie } from "../interfaces/Movie";
+import { red } from "@material-ui/core/colors";
 
 interface Props {
   movie: Movie;
@@ -17,13 +15,17 @@ interface Props {
 export default function MovieComponent(props: Props) {
   const [showMore, setShowMore] = useState(false);
 
-  function handleClick() {
+  const handleClickOutside = () => {
+    setShowMore(false);
+  }
+
+  function showExtendedInfo() {
     setShowMore(!showMore);
   }
 
   return (
-    <View style={styles.movieContainer} onTouchStart={handleClick}>
-      {showMore ? (
+    <View style={styles.movieContainer} onTouchStart={showExtendedInfo}>
+      {!showMore ? (
         <View>
           <Text style={styles.shortMovieHeader}>
             {props.movie.Series_Title} ({props.movie.Released_Year}){" "}
@@ -83,28 +85,30 @@ const styles = StyleSheet.create({
     marginRight: 8,
     borderRadius: 20,
   },
-  picture: {
-    width: 100,
-    height: 150,
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: 10,
-  },
   shortMovieHeader: {
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 5,
   },
+  extendedMovieContainer: {
+    flex: 2,
+    marginHorizontal: "auto",
+    flexDirection: "row",
+  },
+  picture: {
+    width: 100,
+    height: 150,
+    marginBottom: 10,
+  },
+  extendedMovieText: {
+    marginLeft: 5,
+    marginRight: 90,
+  },
   extendedMovieHeader: {
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 5,
-  },
-  extendedMovieText: {
-    marginLeft: 5,
-  },
-  extendedMovieContainer: {
-    //flexDirection: "row"
+
   },
   movieText: {
     fontWeight: "bold",

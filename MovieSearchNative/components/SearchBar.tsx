@@ -27,7 +27,6 @@ export default function SearchBar() {
         value={search}
       />
       <Octicons
-
         name="search"
         size={35}
         color="white"
