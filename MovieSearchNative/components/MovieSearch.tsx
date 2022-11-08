@@ -3,8 +3,9 @@ import React from "react";
 import DisplayMovies from "./DisplayMovies";
 import { Movie } from "../interfaces/Movie";
 import SearchBar from "./SearchBar";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
 import { Row } from "react-bootstrap";
+import Pagination from "./Pagination";
 
 export default function MovieSearch() {
   const movieList: Movie[] = [];
@@ -58,8 +59,7 @@ export default function MovieSearch() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.searchBar}>
-        <FontAwesome5
-          style={styles.historyIcon}
+        <Octicons
           name="history"
           size={35}
           color="white"
@@ -69,20 +69,23 @@ export default function MovieSearch() {
       <ScrollView  style={styles.movies} >
         <DisplayMovies movieList={movieList} />
       </ScrollView>
+      <View style={styles.pagination}>
+      <Pagination/>
+      </View>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {},
-  historyIcon: {
-    backgroundColor: "#4c3c43",
-  },
   searchBar: {
     flexDirection: "row",
     marginLeft: "auto",
     marginRight: "auto",
   },
   movies: {
-    marginTop: 10
+    marginTop: 10,
+  },
+  pagination: {
+    marginTop: 5,
   }
 });

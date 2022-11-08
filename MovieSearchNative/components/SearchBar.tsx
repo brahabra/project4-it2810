@@ -7,7 +7,7 @@ import {
   Button,
 } from "react-native";
 import React, { useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
 //import { makeVar } from "@apollo/client";
 
 //export const titleSearchedFor = makeVar<string>("");
@@ -26,9 +26,9 @@ export default function SearchBar() {
         onChangeText={setSearch}
         value={search}
       />
-      <AntDesign
-        style={styles.searchIcon}
-        name="search1"
+      <Octicons
+
+        name="search"
         size={35}
         color="white"
         title="Search"
@@ -48,8 +48,5 @@ const styles = StyleSheet.create({
     marginRight: 5,
     padding: 10,
     backgroundColor: "white",
-  },
-  searchIcon: {
-    backgroundColor: "#cd6155",
   },
 });

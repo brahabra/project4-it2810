@@ -53,7 +53,7 @@ export default function MovieComponent(props: Props) {
             </Text>
             <Text>
               <Text style={styles.movieText}>Featuring:</Text>{" "}
-              {props.movie.Star1}, {props.movie.Star2}, {props.movie.Star3},{" "}
+              {props.movie.Star1}, {props.movie.Star2}, {props.movie.Star3} and {""}
               {props.movie.Star4}
             </Text>
             <Text>
@@ -92,10 +92,12 @@ const styles = StyleSheet.create({
   },
   shortMovieHeader: {
     fontWeight: "bold",
+    fontSize: 20,
     marginBottom: 5,
   },
   extendedMovieHeader: {
     fontWeight: "bold",
+    fontSize: 20,
     marginBottom: 5,
   },
   extendedMovieText: {
