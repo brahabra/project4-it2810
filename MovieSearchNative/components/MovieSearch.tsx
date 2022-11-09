@@ -100,11 +100,9 @@ export default function MovieSearch() {
           />
           <SearchBar />
         </View>
-         <View style={styles.pagination}>
-            <Pagination
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
+         <View style={styles.filterAndSortContainer}>
+           <FilterByGenre/>
+           <SortByAttribute/>
           </View>
         <ScrollView  style={styles.movies} >
           <DisplayMovies movieList={movieList} />

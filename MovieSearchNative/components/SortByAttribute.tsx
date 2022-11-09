@@ -2,10 +2,13 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { Octicons } from "@expo/vector-icons";
+import { useReactiveVar } from "@apollo/client";
+import { selectedSorting } from "../utils/stateManagement";
 
 export default function SortByAttribute() {
+  const sortOption = useReactiveVar(selectedSorting);
   const sortList = ["Highest rating", "Lowest rating"];
-  let selectedItemGlobal = "";
+  const checkSymbol = " \u2713";
 
   return (
     <View>
@@ -14,17 +17,16 @@ export default function SortByAttribute() {
         rowStyle={styles.row}
         buttonStyle={styles.sortButton}
         data={sortList}
-        defaultButtonText={"Sort by ..."}
+        defaultButtonText={sortOption ? sortOption + checkSymbol : "Sort by ..."}
         onSelect={(selectedItem, index) => {
-          // Handle select
+          selectedSorting(selectedItem)
         }}
-        buttonTextAfterSelection={(selectedItem, index) => {
-          selectedItemGlobal = selectedItem;
-          return selectedItem + " \u2713";
+        buttonTextAfterSelection={() => {
+          return sortOption + checkSymbol;
         }}
         rowTextForSelection={(item, index) => {
-          if (item === selectedItemGlobal) {
-            return item + " \u2713";
+          if (item === sortOption) {
+            return item + checkSymbol;
           } else {
             return item;
           }

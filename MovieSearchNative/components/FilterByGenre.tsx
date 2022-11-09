@@ -1,9 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
+import { selectedGenre } from "../utils/stateManagement";
+import { useReactiveVar } from "@apollo/client";
 
 export default function FilterByGenre() {
-  let selectedItemGlobal = "";
+  const genre = useReactiveVar(selectedGenre);
+  const checkSymbol = " \u2713";
 
   const genresList = [
     "Drama",
@@ -18,6 +21,7 @@ export default function FilterByGenre() {
     "Family",
     "Music",
   ];
+  // @TODO! defaultButtonText should only be "Select genre", but not possible now because of rendering of MovieSearch when next page is clicked
 
   return (
     <View>
@@ -26,17 +30,16 @@ export default function FilterByGenre() {
         rowStyle={styles.row}
         buttonStyle={styles.filterButton}
         data={genresList}
-        defaultButtonText={"Select genre"}
+        defaultButtonText={genre ? genre + checkSymbol : "Select genre"}
         onSelect={(selectedItem, index) => {
-          // Handle select
+          selectedGenre(selectedItem);
         }}
-        buttonTextAfterSelection={(selectedItem, index) => {
-          selectedItemGlobal = selectedItem;
-          return selectedItem + " \u2713";
+        buttonTextAfterSelection={() => {
+          return genre + checkSymbol;
         }}
         rowTextForSelection={(item, index) => {
-          if (item === selectedItemGlobal) {
-            return item + " \u2713";
+          if (item === genre) {
+            return item + checkSymbol;
           } else {
             return item;
           }
