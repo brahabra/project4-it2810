@@ -6,10 +6,12 @@ import SearchBar from "./SearchBar";
 import { Octicons } from "@expo/vector-icons";
 import Pagination from "./Pagination";
 import { useQuery } from "@apollo/client";
-import { PAGE_OPTIONS } from "../enum";
+import { PAGE_OPTIONS } from "../utils/enum";
 import { GET_ALL_MOVIES } from "../queries/getMovies";
+import DisplaySearches from "./DisplaySearches";
 import FilterByGenre from "./FilterByGenre";
 import SortByAttribute from "./SortByAttribute";
+
 
 export default function MovieSearch() {
   const [showSearches, setShowSearches] = useState(false);
@@ -77,38 +79,40 @@ export default function MovieSearch() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {showSearches ? (
+    {showSearches ? (
+      <>
         <Octicons
-          onPress={onPressHistory}
-          name="history"
-          size={35}
-          color="white"
-        />
-      ) : (
-        <>
-          <View style={styles.searchBar}>
-            <Octicons
-              onPress={onPressHistory}
-              name="history"
-              size={35}
-              color="white"
-            />
-            <SearchBar />
-          </View>
-          <View style={styles.filterAndSortContainer}>
-            <FilterByGenre />
-            <SortByAttribute />
-          </View>
-          <ScrollView style={styles.movies}>
-            <DisplayMovies movieList={movieList} />
-          </ScrollView>
-          <View style={styles.pagination}>
+            onPress={onPressHistory}
+            name="history"
+            size={35}
+            color="white"
+          />
+        <DisplaySearches setShowSearches={setShowSearches} />
+      </>
+    ) : (
+      <>
+        <View style={styles.searchBar}>
+          <Octicons
+            onPress={onPressHistory}
+            name="history"
+            size={35}
+            color="white"
+          />
+          <SearchBar />
+        </View>
+         <View style={styles.pagination}>
             <Pagination
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />
           </View>
-        </>
+        <ScrollView  style={styles.movies} >
+          <DisplayMovies movieList={movieList} />
+        </ScrollView>
+        <View style={styles.pagination}>
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        </View>
+      </>
       )}
     </SafeAreaView>
   );
