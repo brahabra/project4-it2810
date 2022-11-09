@@ -6,7 +6,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Movie } from "../interfaces/Movie";
-import { red } from "@material-ui/core/colors";
 
 interface Props {
   movie: Movie;

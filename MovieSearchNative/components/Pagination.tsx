@@ -2,20 +2,24 @@ import { View, Text, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { Octicons } from "@expo/vector-icons";
 
-export default function Pagination() {
-  const [page, setPage] = useState<number>(0);
+interface Props {
+  currentPage: number;
+  setCurrentPage: (value: number) => void;
+}
+
+export default function Pagination(props: Props) {
 
   function handleLeftClick() {
-    if (page > 0) {
-      setPage(page - 1);
+    if (props.currentPage > 0) {
+      props.setCurrentPage(props.currentPage - 1);
     } else {
       alert("First page is showing");
     }
   }
 
   function handleRightClick() {
-    if (page < 10) {
-      setPage(page + 1);
+    if (props.currentPage < 10) {
+      props.setCurrentPage(props.currentPage + 1);
     } else {
       alert("Last page is showing");
     }
@@ -23,7 +27,7 @@ export default function Pagination() {
 
   return (
     <View style={styles.paginationContainer}>
-      {page > 0 ? (
+      {props.currentPage > 0 ? (
         <Octicons
           style={styles.leftArrow}
           name="arrow-left"
@@ -40,9 +44,9 @@ export default function Pagination() {
           onPress={handleLeftClick}
         />
       )}
-      <Text style={styles.pageText}>{page}</Text>
+      <Text style={styles.pageText}>{props.currentPage + 1}</Text>
       {/* Handle showing last page when Apollo data is connected: */}
-      {page < 10 ? (
+      {props.currentPage < 10 ? (
         <Octicons
           style={styles.rightArrow}
           name="arrow-right"
