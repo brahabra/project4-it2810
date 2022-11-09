@@ -9,9 +9,12 @@ import { useQuery } from "@apollo/client";
 import { PAGE_OPTIONS } from "../utils/enum";
 import { GET_ALL_MOVIES } from "../queries/getMovies";
 import DisplaySearches from "./DisplaySearches";
+import FilterByGenre from "./FilterByGenre";
+import SortByAttribute from "./SortByAttribute";
+
 
 export default function MovieSearch() {
-  const [showSearches, setShowSearches] = useState(false)
+  const [showSearches, setShowSearches] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
   const movieList: Movie[] = [];
@@ -70,10 +73,9 @@ export default function MovieSearch() {
 
   //movieList.push(fakeMovie);
 
-
   const onPressHistory = () => {
     setShowSearches(!showSearches);
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -98,6 +100,12 @@ export default function MovieSearch() {
           />
           <SearchBar />
         </View>
+         <View style={styles.pagination}>
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </View>
         <ScrollView  style={styles.movies} >
           <DisplayMovies movieList={movieList} />
         </ScrollView>
@@ -121,5 +129,8 @@ const styles = StyleSheet.create({
   },
   pagination: {
     marginTop: 5,
+  },
+  filterAndSortContainer: {
+    flexDirection: "row"
   }
 });
