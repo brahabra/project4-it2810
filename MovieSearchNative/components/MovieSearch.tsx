@@ -6,8 +6,9 @@ import SearchBar from "./SearchBar";
 import { Octicons } from "@expo/vector-icons";
 import Pagination from "./Pagination";
 import { useQuery } from "@apollo/client";
-import { PAGE_OPTIONS } from "../enum";
+import { PAGE_OPTIONS } from "../utils/enum";
 import { GET_ALL_MOVIES } from "../queries/getMovies";
+import DisplaySearches from "./DisplaySearches";
 
 export default function MovieSearch() {
   const [showSearches, setShowSearches] = useState(false)
@@ -77,12 +78,15 @@ export default function MovieSearch() {
   return (
     <SafeAreaView style={styles.container}>
     {showSearches ? (
-      <Octicons
-          onPress={onPressHistory}
-          name="history"
-          size={35}
-          color="white"
-        />
+      <>
+        <Octicons
+            onPress={onPressHistory}
+            name="history"
+            size={35}
+            color="white"
+          />
+        <DisplaySearches setShowSearches={setShowSearches} />
+      </>
     ) : (
       <>
         <View style={styles.searchBar}>
