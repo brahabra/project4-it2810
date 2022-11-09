@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  ApolloClient,
+  ApolloProvider,
+  gql,
+  InMemoryCache,
+  useQuery,
+} from "@apollo/client";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import Movies from "./components/Movies";
+import { PAGE_OPTIONS } from "./enum";
+import { IExtendedMovie } from "./interfaces/IMovie";
+import { GET_ALL_MOVIES } from "./queries/getMovies";
+
+const client = new ApolloClient({
+  uri: "http://it2810-03.idi.ntnu.no:4000",
+  cache: new InMemoryCache(),
+});
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ApolloProvider client={client}>
+      <Movies />
+    </ApolloProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
