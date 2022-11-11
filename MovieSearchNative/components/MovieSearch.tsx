@@ -10,6 +10,9 @@ import { PAGE_OPTIONS } from "../utils/enum";
 import { GET_ALL_MOVIES } from "../queries/getMovies";
 import DisplaySearches from "./DisplaySearches";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import FilterByGenre from "./FilterByGenre";
+import SortByAttribute from "./SortByAttribute";
+
 
 export default function MovieSearch() {
   const [showSearches, setShowSearches] = useState(false);
@@ -130,4 +133,7 @@ const styles = StyleSheet.create({
   pagination: {
     marginTop: 5,
   },
+  filterAndSortContainer: {
+    flexDirection: "row"
+  }
 });

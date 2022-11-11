@@ -23,7 +23,7 @@ export default function MovieComponent(props: Props) {
   }
 
   return (
-    <View style={styles.movieContainer} onTouchStart={showExtendedInfo}>
+    <View style={styles.movieContainer} onTouchEnd={showExtendedInfo}>
       {!showMore ? (
         <View>
           <Text style={styles.shortMovieHeader}>

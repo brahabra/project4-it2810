@@ -17,7 +17,8 @@
     "react-dom": "18.0.0",
     "react-native": "0.69.6",
     "react-native-web": "~0.18.7",
-    "@expo/webpack-config": "^0.17.0"
+    "@expo/webpack-config": "^0.17.0",
+    "react-native-select-dropdown": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
