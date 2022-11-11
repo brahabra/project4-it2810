@@ -2,7 +2,6 @@ import {
   View,
   Text,
   ScrollView,
-  StyleSheet,
   ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -12,16 +11,19 @@ import { useQuery, useReactiveVar } from "@apollo/client";
 import { GET_ALL_MOVIES } from "../queries/getMovies";
 import { PAGE_OPTIONS } from "../utils/enum";
 import Pagination from "./Pagination";
-import { titleSearchedFor } from "../utils/stateManagement";
+import { selectedGenre, selectedSorting, titleSearchedFor } from "../utils/stateManagement";
+import { styles } from "../styles/DisplayMovies";
 
 export default function DisplayMovies() {
   const [currentPage, setCurrentPage] = useState(0);
   const movieList: Movie[] = [];
   const title = useReactiveVar(titleSearchedFor)
+  const genre = useReactiveVar(selectedGenre)
+  const sort = useReactiveVar(selectedSorting)
 
   useEffect(() => {
     setCurrentPage(0)
-  }, [title])
+  }, [title, genre, sort])
   
 
   const { loading, error, data } = useQuery(GET_ALL_MOVIES, {
@@ -69,16 +71,3 @@ export default function DisplayMovies() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  movies: {
-
-  },
-  pagination: {
-    marginTop: 10
-  },
-  feedbackText: {
-    color: "white",
-    textAlign: "center",
-  },
-});

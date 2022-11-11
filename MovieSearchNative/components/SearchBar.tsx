@@ -1,14 +1,11 @@
 import {
-  View,
-  Text,
-  StyleSheet,
   SafeAreaView,
   TextInput,
-  Button,
 } from "react-native";
 import React, { useState } from "react";
 import { Octicons } from "@expo/vector-icons";
 import { titleSearchedFor } from "../utils/stateManagement";
+import { styles } from "../styles/SearchBar";
 
 export default function SearchBar() {
   const [search, setSearch] = useState("");
@@ -19,7 +16,7 @@ export default function SearchBar() {
   }
 
   return (
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView style={[styles.searchBarContainer]}>
       <TextInput
         style={styles.searchField}
         onChangeText={setSearch}
@@ -36,18 +33,3 @@ export default function SearchBar() {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-  },
-  searchField: {
-    height: 40,
-    width: 270,
-    marginLeft: 5,
-    marginRight: 5,
-    padding: 5,
-    backgroundColor: "white",
-    fontSize: 20,
-    textAlign: "center",
-  },
-});
