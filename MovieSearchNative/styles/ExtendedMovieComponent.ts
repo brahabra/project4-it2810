@@ -32,4 +32,15 @@ export const styles = StyleSheet.create({
   movieParagraphType: {
     fontWeight: "bold",
   },
+  feedbackText: {
+    color: "white",
+    textAlign: "center",
+    marginTop: "auto",
+    marginBottom: "auto",
+    padding: 20
+  },
+  feedbackContainer: {
+    backgroundColor:"#212F3D", 
+    flex: 1
+  }
 });

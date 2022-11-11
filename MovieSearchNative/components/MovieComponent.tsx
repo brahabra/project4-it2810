@@ -14,18 +14,7 @@ export default function MovieComponent(props: Props) {
       <TouchableWithoutFeedback
         onPress={() =>
           props.navigation.navigate("Details", {
-            Series_Title: props.movie.Series_Title,
-            IMDB_Rating: props.movie.IMDB_Rating,
-            Released_Year: props.movie.Released_Year,
-            Director: props.movie.Director,
-            Genre: props.movie.Genre,
-            Overview: props.movie.Overview,
-            Poster_Link: props.movie.Poster_Link,
-            Runtime: props.movie.Runtime,
-            Star1: props.movie.Star1,
-            Star2: props.movie.Star2,
-            Star3: props.movie.Star3,
-            Star4: props.movie.Star4,
+            clickedSeriesTitle: props.movie.Series_Title,
           })
         }
       >
