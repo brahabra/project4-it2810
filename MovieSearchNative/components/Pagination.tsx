@@ -19,7 +19,8 @@ export default function Pagination(props: Props) {
 
   function handleRightClick() {
     props.setCurrentPage(props.currentPage + 1);
-    /*
+    /*   TODO: Handle showing last page when Apollo data is connected
+    
     if (props.currentPage < 10) {
       props.setCurrentPage(props.currentPage + 1);
     } else {

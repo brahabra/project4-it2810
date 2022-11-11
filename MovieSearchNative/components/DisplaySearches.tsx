@@ -7,11 +7,7 @@ import { titleSearchedFor } from "../utils/stateManagement";
 import { Octicons } from "@expo/vector-icons";
 import { styles } from "../styles/DisplaySearches";
 
-interface Props {
-  setShowSearches: (value: boolean) => void;
-}
-
-export default function DisplaySearches(props: Props) {
+export default function DisplaySearches() {
   const { data, loading, error } = useQuery(GET_SEARCHES, {
     variables: {
       options: {
@@ -26,7 +22,7 @@ export default function DisplaySearches(props: Props) {
 
   function handleSearchWordClick(clickedSearchWord: string) {
     titleSearchedFor(clickedSearchWord);
-    props.setShowSearches(false);
+    //props.setShowSearches(false);
   }
 
   if (loading) return <Text>Loading data ...</Text>;

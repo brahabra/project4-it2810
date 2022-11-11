@@ -14,7 +14,11 @@ import Pagination from "./Pagination";
 import { selectedGenre, selectedSorting, titleSearchedFor } from "../utils/stateManagement";
 import { styles } from "../styles/DisplayMovies";
 
-export default function DisplayMovies() {
+interface Props {
+  navigation: any
+}
+
+export default function DisplayMovies(props: Props) {
   const [currentPage, setCurrentPage] = useState(0);
   const movieList: Movie[] = [];
   const title = useReactiveVar(titleSearchedFor)
@@ -62,7 +66,7 @@ export default function DisplayMovies() {
     <>
       <ScrollView style={styles.movies}>
         {movieList.map((movie: Movie, id) => {
-          return <MovieComponent key={id} movie={movie} />;
+          return <MovieComponent navigation={props.navigation} key={id} movie={movie} />;
         })}
       </ScrollView>
       <View style={styles.pagination}>

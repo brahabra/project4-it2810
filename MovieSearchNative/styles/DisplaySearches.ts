@@ -7,10 +7,15 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
   },
-  displaySearchesContainer: {},
+  displaySearchesContainer: { 
+    backgroundColor: "#212F3D",
+    flex: 1
+  },
   displaySearchesHeader: {
     fontWeight: "bold",
+    textAlign: "center",
     fontSize: 20,
+    marginTop: 20,
     color: "white",
   },
   searchIcon: {

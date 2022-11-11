@@ -1,10 +1,6 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React, { useState } from "react";
-import { SafeAreaView, View } from "react-native";
+import { Button, SafeAreaView, View } from "react-native";
 import FilterByGenre from "./components/FilterByGenre";
 import SearchBar from "./components/SearchBar";
 import SortByAttribute from "./components/SortByAttribute";
@@ -12,6 +8,9 @@ import { Octicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import DisplaySearches from "./components/DisplaySearches";
 import DisplayMovies from "./components/DisplayMovies";
 import { styles } from "./styles/App";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ExtendedMovieComponent from "./components/ExtendedMovieComponent";
 
 const client = new ApolloClient({
   uri: "http://it2810-03.idi.ntnu.no:4000",
@@ -19,44 +18,39 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-  const [showSearches, setShowSearches] = useState(false);
+  //const [showSearches, setShowSearches] = useState(false);
+  const Stack = createNativeStackNavigator();
+
+  function MainScreen({ navigation }: { navigation: any }) {
+    return (
+      <SafeAreaView style={styles.appContainer}>
+        <View style={styles.searchBar}>
+          <Octicons
+            onPress={() => navigation.navigate("Search history")}
+            name="history"
+            size={35}
+            color="white"
+          />
+          <SearchBar />
+        </View>
+        <View style={styles.filterAndSortContainer}>
+          <FilterByGenre />
+          <SortByAttribute />
+        </View>
+        <DisplayMovies navigation={navigation} />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <ApolloProvider client={client}>
-      <SafeAreaView style={styles.appContainer}>
-        {showSearches ? (
-          <>
-            <MaterialCommunityIcons
-              style={styles.backButton}
-              onPress={() => setShowSearches(!showSearches)}
-              name="arrow-left-top"
-              size={35}
-              color="white"
-            />
-            <View style={styles.displaySearches}>
-              <DisplaySearches setShowSearches={setShowSearches} />
-            </View>
-          </>
-        ) : (
-          <>
-            <View style={styles.searchBar}>
-              <Octicons
-                onPress={() => setShowSearches(!showSearches)}
-                name="history"
-                size={35}
-                color="white"
-              />
-              <SearchBar />
-            </View>
-            <View style={styles.filterAndSortContainer}>
-              <FilterByGenre />
-              <SortByAttribute />
-            </View>
-
-            <DisplayMovies />
-          </>
-        )}
-      </SafeAreaView>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={MainScreen} />
+          <Stack.Screen name="Details" component={ExtendedMovieComponent} />
+          <Stack.Screen name="Search history" component={DisplaySearches} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </ApolloProvider>
   );
 }
