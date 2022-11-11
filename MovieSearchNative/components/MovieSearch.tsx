@@ -9,9 +9,10 @@ import { useQuery } from "@apollo/client";
 import { PAGE_OPTIONS } from "../utils/enum";
 import { GET_ALL_MOVIES } from "../queries/getMovies";
 import DisplaySearches from "./DisplaySearches";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function MovieSearch() {
-  const [showSearches, setShowSearches] = useState(false)
+  const [showSearches, setShowSearches] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
   const movieList: Movie[] = [];
@@ -70,47 +71,54 @@ export default function MovieSearch() {
 
   //movieList.push(fakeMovie);
 
-
   const onPressHistory = () => {
     setShowSearches(!showSearches);
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-    {showSearches ? (
-      <>
-        <Octicons
+      {showSearches ? (
+        <>
+          <MaterialCommunityIcons
+            style={styles.backButton}
             onPress={onPressHistory}
-            name="history"
+            name="arrow-left-top"
             size={35}
             color="white"
           />
-        <DisplaySearches setShowSearches={setShowSearches} />
-      </>
-    ) : (
-      <>
-        <View style={styles.searchBar}>
-          <Octicons
-            onPress={onPressHistory}
-            name="history"
-            size={35}
-            color="white"
-          />
-          <SearchBar />
-        </View>
-        <ScrollView  style={styles.movies} >
-          <DisplayMovies movieList={movieList} />
-        </ScrollView>
-        <View style={styles.pagination}>
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        </View>
-      </>
+          <DisplaySearches setShowSearches={setShowSearches} />
+        </>
+      ) : (
+        <>
+          <View style={styles.searchBar}>
+            <Octicons
+              onPress={onPressHistory}
+              name="history"
+              size={35}
+              color="white"
+            />
+            <SearchBar />
+          </View>
+          <ScrollView style={styles.movies}>
+            <DisplayMovies movieList={movieList} />
+          </ScrollView>
+          <View style={styles.pagination}>
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </View>
+        </>
       )}
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {},
+  backButton: {
+    display: "flex",
+    marginBottom: 20,
+  },
   searchBar: {
     flexDirection: "row",
     marginLeft: "auto",
@@ -121,5 +129,5 @@ const styles = StyleSheet.create({
   },
   pagination: {
     marginTop: 5,
-  }
+  },
 });
