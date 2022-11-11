@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import { View } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import { selectedGenre } from "../utils/stateManagement";
 import { useReactiveVar } from "@apollo/client";
+import { styles } from "../styles/FilterByGenre";
 
 export default function FilterByGenre() {
   const genre = useReactiveVar(selectedGenre);
@@ -30,7 +30,7 @@ export default function FilterByGenre() {
         rowStyle={styles.row}
         buttonStyle={styles.filterButton}
         data={genresList}
-        defaultButtonText={genre ? genre + checkSymbol : "Select genre"}
+        defaultButtonText={"Select genre"}
         onSelect={(selectedItem, index) => {
           selectedGenre(selectedItem);
         }}
@@ -48,20 +48,3 @@ export default function FilterByGenre() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  selectedRow: {
-    backgroundColor: "lightgrey",
-  },
-  row: {
-    backgroundColor: "white",
-  },
-  filterButton: {
-    backgroundColor: "white",
-    marginLeft: "auto",
-    marginRight: 20,
-    marginTop: 5,
-    height: 40,
-    width: 140,
-  },
-});

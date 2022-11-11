@@ -1,10 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { GET_SEARCHES } from "../queries/getSearches";
 import { useQuery } from "@apollo/client";
 import { PAGE_OPTIONS } from "../utils/enum";
 import { titleSearchedFor } from "../utils/stateManagement";
 import { Octicons } from "@expo/vector-icons";
+import { styles } from "../styles/DisplaySearches";
 
 interface Props {
   setShowSearches: (value: boolean) => void;
@@ -68,23 +69,3 @@ export default function DisplaySearches(props: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  searchesContainer: {
-    marginVertical: 20,
-    marginHorizontal: "auto",
-    flexDirection: "row",
-  },
-  displaySearchesContainer: {},
-  displaySearchesHeader: {
-    fontWeight: "bold",
-    fontSize: 20,
-    color: "white",
-  },
-  searchIcon: {
-    marginRight: 10,
-  },
-  searchesText: {
-    color: "white",
-  },
-});
