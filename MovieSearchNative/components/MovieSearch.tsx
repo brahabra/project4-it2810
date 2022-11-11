@@ -9,10 +9,9 @@ import { useQuery } from "@apollo/client";
 import { PAGE_OPTIONS } from "../utils/enum";
 import { GET_ALL_MOVIES } from "../queries/getMovies";
 import DisplaySearches from "./DisplaySearches";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import FilterByGenre from "./FilterByGenre";
 import SortByAttribute from "./SortByAttribute";
-
 
 export default function MovieSearch() {
   const [showSearches, setShowSearches] = useState(false);
@@ -110,6 +109,10 @@ export default function MovieSearch() {
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />
+            <View style={styles.filterAndSortContainer}>
+              <FilterByGenre />
+              <SortByAttribute />
+            </View>
           </View>
         </>
       )}
@@ -134,6 +137,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   filterAndSortContainer: {
-    flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
 });
