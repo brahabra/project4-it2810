@@ -6,11 +6,15 @@ import SearchBar from "./SearchBar";
 import { Octicons } from "@expo/vector-icons";
 import Pagination from "./Pagination";
 import { useQuery } from "@apollo/client";
-import { PAGE_OPTIONS } from "../enum";
+import { PAGE_OPTIONS } from "../utils/enum";
 import { GET_ALL_MOVIES } from "../queries/getMovies";
+import DisplaySearches from "./DisplaySearches";
+import FilterByGenre from "./FilterByGenre";
+import SortByAttribute from "./SortByAttribute";
+
 
 export default function MovieSearch() {
-  const [showSearches, setShowSearches] = useState(false)
+  const [showSearches, setShowSearches] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
   const movieList: Movie[] = [];
@@ -69,20 +73,22 @@ export default function MovieSearch() {
 
   //movieList.push(fakeMovie);
 
-
   const onPressHistory = () => {
     setShowSearches(!showSearches);
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
     {showSearches ? (
-      <Octicons
-          onPress={onPressHistory}
-          name="history"
-          size={35}
-          color="white"
-        />
+      <>
+        <Octicons
+            onPress={onPressHistory}
+            name="history"
+            size={35}
+            color="white"
+          />
+        <DisplaySearches setShowSearches={setShowSearches} />
+      </>
     ) : (
       <>
         <View style={styles.searchBar}>
@@ -94,6 +100,10 @@ export default function MovieSearch() {
           />
           <SearchBar />
         </View>
+         <View style={styles.filterAndSortContainer}>
+           <FilterByGenre/>
+           <SortByAttribute/>
+          </View>
         <ScrollView  style={styles.movies} >
           <DisplayMovies movieList={movieList} />
         </ScrollView>
@@ -117,5 +127,8 @@ const styles = StyleSheet.create({
   },
   pagination: {
     marginTop: 5,
+  },
+  filterAndSortContainer: {
+    flexDirection: "row"
   }
 });
