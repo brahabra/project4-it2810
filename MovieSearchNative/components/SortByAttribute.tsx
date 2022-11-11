@@ -17,9 +17,9 @@ export default function SortByAttribute() {
         rowStyle={styles.row}
         buttonStyle={styles.sortButton}
         data={sortList}
-        defaultButtonText={sortOption ? sortOption + checkSymbol : "Sort by ..."}
+        defaultButtonText={"Sort by ..."}
         onSelect={(selectedItem, index) => {
-          selectedSorting(selectedItem)
+          selectedSorting(selectedItem);
         }}
         buttonTextAfterSelection={() => {
           return sortOption + checkSymbol;

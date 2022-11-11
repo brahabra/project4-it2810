@@ -30,7 +30,7 @@ export default function FilterByGenre() {
         rowStyle={styles.row}
         buttonStyle={styles.filterButton}
         data={genresList}
-        defaultButtonText={genre ? genre + checkSymbol : "Select genre"}
+        defaultButtonText={"Select genre"}
         onSelect={(selectedItem, index) => {
           selectedGenre(selectedItem);
         }}
@@ -58,8 +58,6 @@ const styles = StyleSheet.create({
   },
   filterButton: {
     backgroundColor: "white",
-    marginLeft: "auto",
-    marginRight: 20,
     marginTop: 5,
     height: 40,
     width: 140,

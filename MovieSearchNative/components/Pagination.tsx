@@ -18,11 +18,13 @@ export default function Pagination(props: Props) {
   }
 
   function handleRightClick() {
+    props.setCurrentPage(props.currentPage + 1);
+    /*
     if (props.currentPage < 10) {
       props.setCurrentPage(props.currentPage + 1);
     } else {
       alert("Last page is showing");
-    }
+    }*/
   }
 
   return (
@@ -45,7 +47,7 @@ export default function Pagination(props: Props) {
         />
       )}
       <Text style={styles.pageText}>{props.currentPage + 1}</Text>
-      {/* Handle showing last page when Apollo data is connected: */}
+      {/* TODO: Handle showing last page when Apollo data is connected: */}
       {props.currentPage < 10 ? (
         <Octicons
           style={styles.rightArrow}

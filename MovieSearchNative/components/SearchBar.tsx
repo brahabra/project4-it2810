@@ -8,15 +8,14 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Octicons } from "@expo/vector-icons";
-//import { makeVar } from "@apollo/client";
-
-//export const titleSearchedFor = makeVar<string>("");
+import { titleSearchedFor } from "../utils/stateManagement";
 
 export default function SearchBar() {
   const [search, setSearch] = useState("");
 
   function addSearch() {
-    alert("Search after " + search + " ...");
+    alert("Search after '" + search + "', and set page to first page");
+    titleSearchedFor(search);
   }
 
   return (
@@ -49,6 +48,6 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: "white",
     fontSize: 20,
-    textAlign: "center"
+    textAlign: "center",
   },
 });
