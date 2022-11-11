@@ -25,6 +25,7 @@ export default function SearchBar() {
         style={styles.searchField}
         onChangeText={setSearch}
         value={search}
+        placeholder={"Enter movie title ..."}
       />
       <Octicons
         name="search"
@@ -41,11 +42,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   searchField: {
-    height: 35,
-    width: 250,
+    height: 40,
+    width: 270,
     marginLeft: 5,
     marginRight: 5,
-    padding: 10,
+    padding: 5,
     backgroundColor: "white",
+    fontSize: 20,
+    textAlign: "center"
   },
 });
