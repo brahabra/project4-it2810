@@ -1,6 +1,8 @@
 import {
+  Keyboard,
   SafeAreaView,
   TextInput,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useState } from "react";
 import { Octicons } from "@expo/vector-icons";
@@ -22,13 +24,19 @@ export default function SearchBar() {
         value={search}
         placeholder={"Enter movie title ..."}
       />
-      <Octicons
-        name="search"
-        size={35}
-        color="white"
-        title="Search"
-        onPress={addSearch}
-      />
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <Octicons
+          name="search"
+          size={35}
+          color="white"
+          title="Search"
+          onPress={addSearch}
+        />
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
