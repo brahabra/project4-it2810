@@ -10,6 +10,8 @@ import { styles } from "../styles/ExtendedMovieComponent";
 import { useQuery } from "@apollo/client";
 import { GET_CLICKED_MOVIE } from "../queries/getMovies";
 import { Movie } from "../interfaces/Movie";
+import { Octicons } from "@expo/vector-icons";
+import { toHoursAndMinutes } from "../utils/toHoursAndMinutes";
 
 export default function ExtendedMovieComponent({ route }: { route: any }) {
   const { clickedSeriesTitle } = route.params;
@@ -33,10 +35,10 @@ export default function ExtendedMovieComponent({ route }: { route: any }) {
     Star4: "",
   };
 
-// @TODO!
-//
-// Must be handled better. If two movies have the same name, the app will crash. But works for now
-const { loading, error, data } = useQuery(GET_CLICKED_MOVIE, {
+  // @TODO!
+  //
+  // Must be handled better. If two movies have the same name, the app will crash. But works for now
+  const { loading, error, data } = useQuery(GET_CLICKED_MOVIE, {
     variables: {
       where: {
         Series_Title: clickedSeriesTitle,
@@ -47,14 +49,20 @@ const { loading, error, data } = useQuery(GET_CLICKED_MOVIE, {
   if (loading)
     return (
       <View style={styles.feedbackContainer}>
-        <ActivityIndicator size="large" />
-        <Text style={styles.feedbackText}>Loading...</Text>
+        <View style={styles.loadingFeedback}>
+          <ActivityIndicator size="large" />
+          <Text style={styles.feedbackText}>Loading "{clickedSeriesTitle}"...</Text>
+        </View>
       </View>
     );
+
   if (error)
     return (
       <View style={styles.feedbackContainer}>
-        <Text style={styles.feedbackText}>Error! ${error.message}</Text>
+        <View style={styles.errorFeedback}>
+          <Octicons name="alert" size={40} color="white" />
+          <Text style={styles.feedbackText}>Error! ${error.message}</Text>
+        </View>
       </View>
     );
 
@@ -91,7 +99,7 @@ const { loading, error, data } = useQuery(GET_CLICKED_MOVIE, {
           </Text>
           <Text style={styles.movieParagraph}>
             <Text style={styles.movieParagraphType}>Runtime: </Text>
-            {movie.Runtime}
+            {movie.Runtime} ({toHoursAndMinutes(parseInt(movie.Runtime))})
           </Text>
           <Text style={styles.movieParagraph}>
             <Text style={styles.movieParagraphType}>Directed by:</Text>{" "}

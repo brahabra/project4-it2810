@@ -35,12 +35,20 @@ export const styles = StyleSheet.create({
   feedbackText: {
     color: "white",
     textAlign: "center",
-    marginTop: "auto",
-    marginBottom: "auto",
-    padding: 20
+    padding: 20,
   },
   feedbackContainer: {
     backgroundColor:"#212F3D", 
     flex: 1
+  },
+  errorFeedback: {
+    alignItems:  "center",
+    marginTop: "auto",
+    marginBottom: "auto"
+  },
+  loadingFeedback: {
+    alignItems: "center",
+    marginTop: "auto",
+    marginBottom: "auto"
   }
 });
