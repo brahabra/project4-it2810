@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { Movie } from "../interfaces/Movie";
 import MovieComponent from "./MovieComponent";
 import { useQuery, useReactiveVar } from "@apollo/client";
-import { GET_ALL_MOVIES } from "../queries/getMovies";
+import { GET_ALL_MOVIES, GET_ALL_MOVIES_FILTER_BY_GENRE, GET_MOVIES_BY_TITLE, GET_MOVIES_BY_TITLE_ASC, GET_MOVIES_BY_TITLE_FILTER_BY_GENRE, GET_MOVIES_BY_TITLE_FILTER_BY_GENRE_ASC } from "../queries/getMovies";
 import { PAGE_OPTIONS } from "../utils/enum";
 import Pagination from "./Pagination";
 import { selectedGenre, selectedSorting, titleSearchedFor } from "../utils/stateManagement";
@@ -24,15 +24,44 @@ export default function DisplayMovies() {
   useEffect(() => {
     setCurrentPage(0)
   }, [title, genre, sort])
-  
 
-  const { loading, error, data } = useQuery(GET_ALL_MOVIES, {
+  function setQuery() {
+    if (title && !genre) {
+      if (sort === "ASC") {
+        return GET_MOVIES_BY_TITLE_ASC;
+      } else {
+        return GET_MOVIES_BY_TITLE;
+      }
+    }
+    if (!title && genre) {
+      return GET_ALL_MOVIES_FILTER_BY_GENRE;
+    }
+    if (title && genre) {
+      if (sort === "ASC") {
+        return GET_MOVIES_BY_TITLE_FILTER_BY_GENRE_ASC;
+      } else {
+        return GET_MOVIES_BY_TITLE_FILTER_BY_GENRE;
+      }
+    }
+    else {
+      return GET_ALL_MOVIES;
+    }
+  }
+
+  console.log(sort)
+
+  const { loading, error, data } = useQuery(setQuery(), {
     variables: {
+      where: {
+        Genre_CONTAINS: genre,
+      },
+      filterString: genre,
+      searchString: title,
       options: {
         offset: currentPage * PAGE_OPTIONS.PAGE_SIZE,
         limit: PAGE_OPTIONS.PAGE_SIZE,
         sort: {
-          IMDB_Rating: "DESC",
+          IMDB_Rating: sort,
         },
       },
     },
@@ -53,9 +82,33 @@ export default function DisplayMovies() {
     );
 
   if (data) {
-    data.movies.forEach((movie: Movie) => {
-      movieList.push(movie);
-    });
+    if (title && !genre) {
+      if (sort === "ASC") {
+        data.findMovieByTitleASC.forEach((movie: Movie) => {
+          movieList.push(movie);
+        });
+      } else {
+        data.findMovieByTitleDESC.forEach((movie: Movie) => {
+          movieList.push(movie);
+        });
+      }
+    }
+    else if (title && genre) {
+      if (sort === "ASC") {
+        data.findMovieByTitleWithGenreFilterASC.forEach((movie: Movie) => {
+          movieList.push(movie);
+        });
+      } else {
+        data.findMovieByTitleWithGenreFilterDESC.forEach((movie: Movie) => {
+          movieList.push(movie);
+        });
+      }
+    }
+    else {
+      data.movies.forEach((movie: Movie) => {
+        movieList.push(movie);
+      });
+    }
   }
 
   return (

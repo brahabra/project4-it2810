@@ -11,7 +11,6 @@ export default function SearchBar() {
   const [search, setSearch] = useState("");
 
   function addSearch() {
-    alert("Search after '" + search + "', and set page to first page");
     titleSearchedFor(search);
   }
 
