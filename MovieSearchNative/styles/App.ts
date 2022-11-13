@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
   },
   searchBar: {
     flexDirection: "row",
+    marginTop: 10,
     marginLeft: "auto",
     marginRight: "auto",
   },

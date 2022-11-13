@@ -13,8 +13,13 @@ import { PAGE_OPTIONS } from "../utils/enum";
 import Pagination from "./Pagination";
 import { selectedGenre, selectedSorting, titleSearchedFor } from "../utils/stateManagement";
 import { styles } from "../styles/DisplayMovies";
+import { Octicons } from '@expo/vector-icons';
 
-export default function DisplayMovies() {
+interface Props {
+  navigation: any
+}
+
+export default function DisplayMovies(props: Props) {
   const [currentPage, setCurrentPage] = useState(0);
   const movieList: Movie[] = [];
   const title = useReactiveVar(titleSearchedFor)
@@ -67,15 +72,21 @@ export default function DisplayMovies() {
 
   if (loading)
     return (
-      <View>
-        <ActivityIndicator size="large" />
-        <Text style={styles.feedbackText}>Loading...</Text>
+      <View style={styles.feedbackContainer}>
+        <View style={styles.loadingFeedback}>
+          <ActivityIndicator size="large" />
+          <Text style={styles.feedbackText}>Loading movies...</Text>
+        </View>
       </View>
     );
+    
   if (error)
     return (
-      <View>
-        <Text style={styles.feedbackText}>Error! ${error.message}</Text>
+      <View style={styles.feedbackContainer}>
+        <View style={styles.errorFeedback}>
+          <Octicons name="alert" size={40} color="white" />
+          <Text style={styles.feedbackText}>Error! ${error.message}</Text>
+        </View>
       </View>
     );
 
@@ -111,9 +122,9 @@ export default function DisplayMovies() {
 
   return (
     <>
-      <ScrollView style={styles.movies}>
+      <ScrollView>
         {movieList.map((movie: Movie, id) => {
-          return <MovieComponent key={id} movie={movie} />;
+          return <MovieComponent navigation={props.navigation} key={id} movie={movie} />;
         })}
       </ScrollView>
       <View style={styles.pagination}>

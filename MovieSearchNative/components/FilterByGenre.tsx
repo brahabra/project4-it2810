@@ -21,7 +21,6 @@ export default function FilterByGenre() {
     "Family",
     "Music",
   ];
-  // @TODO! defaultButtonText should only be "Select genre", but not possible now because of rendering of MovieSearch when next page is clicked
 
   return (
     <View>

@@ -14,25 +14,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 5,
   },
-  extendedMovieContainer: {
-    flex: 2,
-    marginHorizontal: "auto",
-    flexDirection: "row",
-  },
-  picture: {
-    width: 100,
-    height: 150,
-    marginBottom: 10,
-  },
-  extendedMovieText: {
-    marginLeft: 5,
-    marginRight: 90,
-  },
-  extendedMovieHeader: {
-    fontWeight: "bold",
-    fontSize: 20,
-    marginBottom: 5,
-  },
   movieText: {
     fontWeight: "bold",
   },

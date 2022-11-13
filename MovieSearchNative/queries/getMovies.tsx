@@ -6,6 +6,19 @@ export const GET_ALL_MOVIES = gql`
     movies(options: $options) {
       Poster_Link
       Series_Title
+      IMDB_Rating
+      Released_Year
+      Overview
+    }
+  }
+`;
+
+// Query for getting all the info to the clicked movie
+export const GET_CLICKED_MOVIE = gql`
+  query ($where: MovieWhere) {
+    movies(where: $where) {
+      Poster_Link
+      Series_Title
       Released_Year
       Runtime
       Genre
@@ -19,6 +32,7 @@ export const GET_ALL_MOVIES = gql`
     }
   }
 `;
+
 
 // Query for getting all movies with the selected genre
 export const GET_ALL_MOVIES_FILTER_BY_GENRE = gql`
