@@ -45,7 +45,17 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#28213D",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        >
           <Stack.Screen name="Home" component={MainScreen} />
           <Stack.Screen name="Details" component={ExtendedMovieComponent} />
           <Stack.Screen name="Search history" component={DisplaySearches} />
