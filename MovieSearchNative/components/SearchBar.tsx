@@ -46,7 +46,7 @@ export default function SearchBar() {
     if (search.trim()) {
       addSearch({
         variables: {
-          title: search,
+          title: titleSearchedFor(),
           created: d.toISOString(),
         },
       });
@@ -57,9 +57,7 @@ export default function SearchBar() {
     if (!format.test(search)) {
       addToSearchLog();
     } else {
-      alert(
-        "No special characters allowed! Please try again."
-      );
+      alert("No special characters allowed! Please try again.");
     }
   };
 
