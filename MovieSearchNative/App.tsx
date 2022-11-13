@@ -6,12 +6,12 @@ import {
 import React, { useState } from "react";
 import { SafeAreaView, View } from "react-native";
 import FilterByGenre from "./components/FilterByGenre";
-import SearchBar from "./components/SearchBar";
 import SortByAttribute from "./components/SortByAttribute";
 import { Octicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import DisplaySearches from "./components/DisplaySearches";
 import DisplayMovies from "./components/DisplayMovies";
 import { styles } from "./styles/App";
+import SearchBarComponent from "./components/SearchBarComponent";
 
 const client = new ApolloClient({
   uri: "http://it2810-03.idi.ntnu.no:4000",
@@ -41,12 +41,13 @@ export default function App() {
           <>
             <View style={styles.searchBar}>
               <Octicons
+              style={styles.searchIcon}
                 onPress={() => setShowSearches(!showSearches)}
                 name="history"
                 size={35}
                 color="white"
               />
-              <SearchBar />
+              <SearchBarComponent />
             </View>
             <View style={styles.filterAndSortContainer}>
               <FilterByGenre />
