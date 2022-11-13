@@ -7,7 +7,7 @@ import { styles } from "../styles/SortByAttribute";
 
 export default function SortByAttribute() {
   const sortOption = useReactiveVar(selectedSorting);
-  const sortList = ["Highest rating", "Lowest rating"];
+  const sortList = ["ASC", "DESC"];
   const checkSymbol = " \u2713";
 
   return (
