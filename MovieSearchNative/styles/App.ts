@@ -26,4 +26,9 @@ export const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 20,
   },
+  searchIcon: {
+    marginTop: "auto",
+    marginBottom: "auto",
+    marginRight: 10
+  }
 });

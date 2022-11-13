@@ -1,20 +1,13 @@
-import {
-  Text,
-  Keyboard,
-  SafeAreaView,
-  TextInput,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import React, { useState } from "react";
-import { Octicons } from "@expo/vector-icons";
 import { titleSearchedFor } from "../utils/stateManagement";
-import { styles } from "../styles/SearchBar";
 import { GET_SEARCHES } from "../queries/getSearches";
 import { useMutation } from "@apollo/client";
 import { CREATE_SEARCHES } from "../queries/createSearches";
 import { PAGE_OPTIONS } from "../utils/enum";
+import { SearchBar } from "@rneui/themed";
 
-export default function SearchBar() {
+export default function SearchBarComponent() {
   const [search, setSearch] = useState("");
   const d = new Date();
 
@@ -53,38 +46,43 @@ export default function SearchBar() {
     }
   }
 
-  const onSubmit = () => {
-    if (!format.test(search)) {
-      addToSearchLog();
-    } else {
-      alert("No special characters allowed! Please try again.");
+  const onSubmit = (event: any) => {
+    if (search.trim().length > 45) {
+      alert("Search can not contain more than 45 characters!");
     }
+    else {
+      if (!format.test(search)) {
+        addToSearchLog();
+      } else {
+        alert("No special characters allowed! Please try again.");
+      }
+    }
+  };
+
+  const updateSearchString = (search: string) => {
+    setSearch(search);
   };
 
   if (loading) return <Text>Saving search ...</Text>;
   if (error) return <Text>Could not save search ...</Text>;
 
   return (
-    <SafeAreaView style={[styles.searchBarContainer]}>
-      <TextInput
-        style={styles.searchField}
-        onChangeText={setSearch}
-        value={search}
+    <SafeAreaView>
+      <SearchBar
         placeholder={"Enter movie title ..."}
-      />
-      <TouchableWithoutFeedback
-        onPress={() => {
-          Keyboard.dismiss();
+        onChangeText={updateSearchString}
+        onSubmitEditing={onSubmit}
+        value={search}
+        inputContainerStyle={{ backgroundColor: "white", width: 290 }}
+        leftIconContainerStyle={{ backgroundColor: "white" }}
+        inputStyle={{ backgroundColor: "white", color: "black" }}
+        containerStyle={{
+          backgroundColor: "white",
+          justifyContent: "space-around",
+          borderTopWidth: 0,
+          borderBottomWidth: 0,
         }}
-      >
-        <Octicons
-          name="search"
-          size={35}
-          color="white"
-          title="Search"
-          onPress={onSubmit}
-        />
-      </TouchableWithoutFeedback>
+      />
     </SafeAreaView>
   );
 }

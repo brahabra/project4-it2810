@@ -2,7 +2,6 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React, { useState } from "react";
 import { Button, SafeAreaView, View } from "react-native";
 import FilterByGenre from "./components/FilterByGenre";
-import SearchBar from "./components/SearchBar";
 import SortByAttribute from "./components/SortByAttribute";
 import { Octicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import DisplaySearches from "./components/DisplaySearches";
@@ -11,6 +10,7 @@ import { styles } from "./styles/App";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ExtendedMovieComponent from "./components/ExtendedMovieComponent";
+import SearchBarComponent from "./components/SearchBarComponent";
 
 const client = new ApolloClient({
   uri: "http://it2810-03.idi.ntnu.no:4000",
@@ -26,12 +26,13 @@ export default function App() {
       <SafeAreaView style={styles.appContainer}>
         <View style={styles.searchBar}>
           <Octicons
+           style={styles.searchIcon}
             onPress={() => navigation.navigate("Search history")}
             name="history"
             size={35}
             color="white"
           />
-          <SearchBar />
+          <SearchBarComponent />
         </View>
         <View style={styles.filterAndSortContainer}>
           <FilterByGenre />
