@@ -48,8 +48,6 @@ export default function DisplayMovies() {
     }
   }
 
-  console.log(sort)
-
   const { loading, error, data } = useQuery(setQuery(), {
     variables: {
       where: {
