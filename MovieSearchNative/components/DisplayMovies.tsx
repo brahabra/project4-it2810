@@ -64,6 +64,7 @@ export default function DisplayMovies(props: Props) {
         offset: currentPage * PAGE_OPTIONS.PAGE_SIZE,
         limit: PAGE_OPTIONS.PAGE_SIZE,
         sort: {
+          Series_Title: "DESC",
           IMDB_Rating: sort,
         },
       },

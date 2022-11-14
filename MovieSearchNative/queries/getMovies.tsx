@@ -40,16 +40,9 @@ export const GET_ALL_MOVIES_FILTER_BY_GENRE = gql`
     movies(where: $where, options: $options) {
       Poster_Link
       Series_Title
-      Released_Year
-      Runtime
-      Genre
       IMDB_Rating
+      Released_Year
       Overview
-      Director
-      Star1
-      Star2
-      Star3
-      Star4
     }
   }
 `;
@@ -63,16 +56,9 @@ export const GET_MOVIES_BY_TITLE = gql`
     {
       Poster_Link
       Series_Title
-      Released_Year
-      Runtime
-      Genre
       IMDB_Rating
+      Released_Year
       Overview
-      Director
-      Star1
-      Star2
-      Star3
-      Star4
     }
   }
 `;
@@ -86,16 +72,9 @@ export const GET_MOVIES_BY_TITLE_ASC = gql`
     {
       Poster_Link
       Series_Title
-      Released_Year
-      Runtime
-      Genre
       IMDB_Rating
+      Released_Year
       Overview
-      Director
-      Star1
-      Star2
-      Star3
-      Star4
     }
   }
 `;
@@ -111,16 +90,9 @@ export const GET_MOVIES_BY_TITLE_FILTER_BY_GENRE = gql`
     {
       Poster_Link
       Series_Title
-      Released_Year
-      Runtime
-      Genre
       IMDB_Rating
+      Released_Year
       Overview
-      Director
-      Star1
-      Star2
-      Star3
-      Star4
     }
   }
 `;
@@ -136,16 +108,9 @@ export const GET_MOVIES_BY_TITLE_FILTER_BY_GENRE_ASC = gql`
     {
       Poster_Link
       Series_Title
-      Released_Year
-      Runtime
-      Genre
       IMDB_Rating
+      Released_Year
       Overview
-      Director
-      Star1
-      Star2
-      Star3
-      Star4
     }
   }
 `;
