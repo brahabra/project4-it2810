@@ -121,6 +121,19 @@ export default function DisplayMovies(props: Props) {
     }
   }
 
+  if (movieList.length < 1) {
+    return (
+      <>
+        <ScrollView style={styles.feedbackContainer}>
+          <Text style={styles.feedbackText}>No movies found matching search!</Text>
+        </ScrollView>
+        <View style={styles.pagination}>
+          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        </View>
+      </>
+    );
+  }
+
   return (
     <>
       <ScrollView>
