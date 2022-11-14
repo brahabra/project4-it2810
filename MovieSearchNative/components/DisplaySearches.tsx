@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import React from "react";
 import { GET_SEARCHES } from "../queries/getSearches";
 import { useQuery } from "@apollo/client";
@@ -25,8 +25,25 @@ export default function DisplaySearches() {
     //props.setShowSearches(false);
   }
 
-  if (loading) return <Text>Loading data ...</Text>;
-  if (error) return <Text>Could not load searches ...</Text>;
+  if (loading)
+    return (
+      <View style={styles.feedbackSearchesContainer}>
+        <View style={styles.loadingSearchesFeedback}>
+          <ActivityIndicator size="large" />
+          <Text style={styles.feedbackSearchesText}>Loading searches ...</Text>
+        </View>
+      </View>
+    );
+    
+  if (error)
+    return (
+      <View style={styles.feedbackSearchesContainer}>
+        <View style={styles.errorSearchesFeedback}>
+          <Octicons name="alert" size={40} color="white" />
+          <Text style={styles.feedbackSearchesText}>Could not load searches ...</Text>
+        </View>
+      </View>
+    );
 
   // If we have searches, view the searches. The search word and when it was searched after is showing.
   function showSearches() {

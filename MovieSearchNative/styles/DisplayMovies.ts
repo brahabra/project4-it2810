@@ -10,11 +10,10 @@ export const styles = StyleSheet.create({
   },
   feedbackContainer: {
     backgroundColor:"#212F3D", 
-    alignSelf: "center",
-    flex: 1
+    flex: 1,
   },
   errorFeedback: {
-    alignItems:  "center",
+    alignItems: "center",
     marginTop: "auto",
     marginBottom: "auto"
   },
