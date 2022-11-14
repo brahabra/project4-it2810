@@ -46,7 +46,7 @@ export default function SearchBarComponent() {
     }
   }
 
-  const onSubmit = (event: any) => {
+  const onSubmit = () => {
     if (search.trim().length > 45) {
       alert("Search can not contain more than 45 characters!");
     }
@@ -59,10 +59,6 @@ export default function SearchBarComponent() {
     }
   };
 
-  const updateSearchString = (search: string) => {
-    setSearch(search);
-  };
-
   if (loading) return <Text>Saving search ...</Text>;
   if (error) return <Text>Could not save search ...</Text>;
 
@@ -70,7 +66,7 @@ export default function SearchBarComponent() {
     <SafeAreaView>
       <SearchBar
         placeholder={"Enter movie title ..."}
-        onChangeText={updateSearchString}
+        onChangeText={(setSearch)}
         onSubmitEditing={onSubmit}
         value={search}
         inputContainerStyle={{ backgroundColor: "white", width: 290 }}
