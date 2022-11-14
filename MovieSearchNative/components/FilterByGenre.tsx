@@ -9,6 +9,7 @@ export default function FilterByGenre() {
   const checkSymbol = " \u2713";
 
   const genresList = [
+    "None",
     "Drama",
     "War",
     "Action",
@@ -30,13 +31,21 @@ export default function FilterByGenre() {
         buttonStyle={styles.filterButton}
         data={genresList}
         defaultButtonText={"Select genre"}
-        onSelect={(selectedItem, index) => {
-          selectedGenre(selectedItem);
+        onSelect={(selectedItem) => {
+          if (selectedItem === "None") {
+            selectedGenre("");
+          } else {
+            selectedGenre(selectedItem);
+          }
         }}
         buttonTextAfterSelection={() => {
-          return genre + checkSymbol;
+          if (genre === "") {
+            return "Select genre"
+          } else {
+            return genre + checkSymbol;
+          }
         }}
-        rowTextForSelection={(item, index) => {
+        rowTextForSelection={(item) => {
           if (item === genre) {
             return item + checkSymbol;
           } else {
