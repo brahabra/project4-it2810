@@ -1,34 +1,36 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, ScrollView, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Movie } from "../interfaces/Movie";
 import MovieComponent from "./MovieComponent";
 import { useQuery, useReactiveVar } from "@apollo/client";
-import { GET_ALL_MOVIES, GET_ALL_MOVIES_FILTER_BY_GENRE, GET_MOVIES_BY_TITLE, GET_MOVIES_BY_TITLE_ASC, GET_MOVIES_BY_TITLE_FILTER_BY_GENRE, GET_MOVIES_BY_TITLE_FILTER_BY_GENRE_ASC } from "../queries/getMovies";
+import {
+  GET_ALL_MOVIES,
+  GET_ALL_MOVIES_FILTER_BY_GENRE,
+  GET_MOVIES_BY_TITLE,
+  GET_MOVIES_BY_TITLE_ASC,
+  GET_MOVIES_BY_TITLE_FILTER_BY_GENRE,
+  GET_MOVIES_BY_TITLE_FILTER_BY_GENRE_ASC,
+} from "../queries/getMovies";
 import { PAGE_OPTIONS } from "../utils/enum";
 import Pagination from "./Pagination";
-import { selectedGenre, selectedSorting, titleSearchedFor } from "../utils/stateManagement";
+import {
+  selectedGenre,
+  selectedSorting,
+  titleSearchedFor,
+} from "../utils/stateManagement";
 import { styles } from "../styles/DisplayMovies";
-import { Octicons } from '@expo/vector-icons';
+import { Octicons } from "@expo/vector-icons";
 
-interface Props {
-  navigation: any
-}
-
-export default function DisplayMovies(props: Props) {
+export default function DisplayMovies() {
   const [currentPage, setCurrentPage] = useState(0);
   const movieList: Movie[] = [];
-  const title = useReactiveVar(titleSearchedFor)
-  const genre = useReactiveVar(selectedGenre)
-  const sort = useReactiveVar(selectedSorting)
+  const title = useReactiveVar(titleSearchedFor);
+  const genre = useReactiveVar(selectedGenre);
+  const sort = useReactiveVar(selectedSorting);
 
   useEffect(() => {
-    setCurrentPage(0)
-  }, [title, genre, sort])
+    setCurrentPage(0);
+  }, [title, genre, sort]);
 
   function setQuery() {
     if (title && !genre) {
@@ -47,8 +49,7 @@ export default function DisplayMovies(props: Props) {
       } else {
         return GET_MOVIES_BY_TITLE_FILTER_BY_GENRE;
       }
-    }
-    else {
+    } else {
       return GET_ALL_MOVIES;
     }
   }
@@ -80,7 +81,7 @@ export default function DisplayMovies(props: Props) {
         </View>
       </View>
     );
-    
+
   if (error)
     return (
       <View style={styles.feedbackContainer}>
@@ -102,8 +103,7 @@ export default function DisplayMovies(props: Props) {
           movieList.push(movie);
         });
       }
-    }
-    else if (title && genre) {
+    } else if (title && genre) {
       if (sort === "ASC") {
         data.findMovieByTitleWithGenreFilterASC.forEach((movie: Movie) => {
           movieList.push(movie);
@@ -113,8 +113,7 @@ export default function DisplayMovies(props: Props) {
           movieList.push(movie);
         });
       }
-    }
-    else {
+    } else {
       data.movies.forEach((movie: Movie) => {
         movieList.push(movie);
       });
@@ -125,10 +124,15 @@ export default function DisplayMovies(props: Props) {
     return (
       <>
         <ScrollView style={styles.feedbackContainer}>
-          <Text style={styles.feedbackText}>No movies found matching search!</Text>
+          <Text style={styles.feedbackText}>
+            No movies found matching search '{titleSearchedFor()}'!
+          </Text>
         </ScrollView>
         <View style={styles.pagination}>
-          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </View>
       </>
     );
@@ -138,7 +142,7 @@ export default function DisplayMovies(props: Props) {
     <>
       <ScrollView>
         {movieList.map((movie: Movie, id) => {
-          return <MovieComponent navigation={props.navigation} key={id} movie={movie} />;
+          return <MovieComponent key={id} movie={movie} />;
         })}
       </ScrollView>
       <View style={styles.pagination}>

@@ -35,9 +35,6 @@ export default function ExtendedMovieComponent({ route }: { route: any }) {
     Star4: "",
   };
 
-  // @TODO!
-  //
-  // Must be handled better. If two movies have the same name, the app will crash. But works for now
   const { loading, error, data } = useQuery(GET_CLICKED_MOVIE, {
     variables: {
       where: {
@@ -51,7 +48,9 @@ export default function ExtendedMovieComponent({ route }: { route: any }) {
       <View style={styles.feedbackContainer}>
         <View style={styles.loadingFeedback}>
           <ActivityIndicator size="large" />
-          <Text style={styles.feedbackText}>Loading "{clickedSeriesTitle}"...</Text>
+          <Text style={styles.feedbackText}>
+            Loading "{clickedSeriesTitle}"...
+          </Text>
         </View>
       </View>
     );

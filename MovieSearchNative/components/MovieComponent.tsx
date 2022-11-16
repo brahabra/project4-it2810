@@ -2,18 +2,20 @@ import { View, Text, TouchableWithoutFeedback } from "react-native";
 import React, { useState } from "react";
 import { Movie } from "../interfaces/Movie";
 import { styles } from "../styles/MovieComponent";
+import { useNavigation } from "@react-navigation/native";
 
 interface Props {
   movie: Movie;
-  navigation: any;
 }
 
 export default function MovieComponent(props: Props) {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.movieContainer}>
       <TouchableWithoutFeedback
         onPress={() =>
-          props.navigation.navigate("Details", {
+          navigation.navigate("Details", {
             clickedSeriesTitle: props.movie.Series_Title,
           })
         }

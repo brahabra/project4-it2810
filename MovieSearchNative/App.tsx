@@ -18,7 +18,6 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-  //const [showSearches, setShowSearches] = useState(false);
   const Stack = createNativeStackNavigator();
 
   function MainScreen({ navigation }: { navigation: any }) {
@@ -26,8 +25,8 @@ export default function App() {
       <SafeAreaView style={styles.appContainer}>
         <View style={styles.searchBar}>
           <Octicons
-           style={styles.searchIcon}
-            onPress={() => navigation.navigate("Search history")}
+            style={styles.searchIcon}
+            onPress={() => navigation.navigate("History")}
             name="history"
             size={35}
             color="white"
@@ -38,7 +37,7 @@ export default function App() {
           <FilterByGenre />
           <SortByAttribute />
         </View>
-        <DisplayMovies navigation={navigation} />
+        <DisplayMovies />
       </SafeAreaView>
     );
   }
@@ -59,7 +58,7 @@ export default function App() {
         >
           <Stack.Screen name="Home" component={MainScreen} />
           <Stack.Screen name="Details" component={ExtendedMovieComponent} />
-          <Stack.Screen name="Search history" component={DisplaySearches} />
+          <Stack.Screen name="History" component={DisplaySearches} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
