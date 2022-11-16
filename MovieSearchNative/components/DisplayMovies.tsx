@@ -62,7 +62,7 @@ export default function DisplayMovies(props: Props) {
       searchString: title,
       options: {
         offset: currentPage * PAGE_OPTIONS.PAGE_SIZE,
-        limit: PAGE_OPTIONS.PAGE_SIZE,
+        limit: PAGE_OPTIONS.PAGE_SIZE + 1,
         sort: {
           Series_Title: "DESC",
           IMDB_Rating: sort,
@@ -128,7 +128,7 @@ export default function DisplayMovies(props: Props) {
           <Text style={styles.feedbackText}>No movies found matching search!</Text>
         </ScrollView>
         <View style={styles.pagination}>
-          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          <Pagination movieList={movieList} currentPage={currentPage} setCurrentPage={setCurrentPage} />
         </View>
       </>
     );
@@ -138,11 +138,13 @@ export default function DisplayMovies(props: Props) {
     <>
       <ScrollView>
         {movieList.map((movie: Movie, id) => {
-          return <MovieComponent navigation={props.navigation} key={id} movie={movie} />;
+          if (id !== PAGE_OPTIONS.PAGE_SIZE) {
+            return <MovieComponent navigation={props.navigation} key={id} movie={movie} />;
+          }
         })}
       </ScrollView>
       <View style={styles.pagination}>
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <Pagination movieList={movieList} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </View>
     </>
   );
