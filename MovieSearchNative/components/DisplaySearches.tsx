@@ -6,8 +6,11 @@ import { PAGE_OPTIONS } from "../utils/enum";
 import { titleSearchedFor } from "../utils/stateManagement";
 import { Octicons } from "@expo/vector-icons";
 import { styles } from "../styles/DisplaySearches";
+import { useNavigation } from "@react-navigation/native";
 
 export default function DisplaySearches() {
+  const navigation = useNavigation();
+
   const { data, loading, error } = useQuery(GET_SEARCHES, {
     variables: {
       options: {
@@ -22,7 +25,7 @@ export default function DisplaySearches() {
 
   function handleSearchWordClick(clickedSearchWord: string) {
     titleSearchedFor(clickedSearchWord);
-    //props.setShowSearches(false);
+    navigation.navigate("Home");
   }
 
   if (loading)
@@ -34,13 +37,15 @@ export default function DisplaySearches() {
         </View>
       </View>
     );
-    
+
   if (error)
     return (
       <View style={styles.feedbackSearchesContainer}>
         <View style={styles.errorSearchesFeedback}>
           <Octicons name="alert" size={40} color="white" />
-          <Text style={styles.feedbackSearchesText}>Could not load searches ...</Text>
+          <Text style={styles.feedbackSearchesText}>
+            Could not load searches ...
+          </Text>
         </View>
       </View>
     );
@@ -50,7 +55,6 @@ export default function DisplaySearches() {
     return data?.searches.map(
       ({ title, created }: { title: string; created: string }) => (
         <View style={styles.searchesContainer} key={created}>
-        
           <Octicons
             style={styles.searchIcon}
             name="search"

@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
   },
   feedbackText: {
     color: "white",
-    marginTop: 20
+    marginTop: 20,
+    alignSelf: "center"
   },
   feedbackContainer: {
     backgroundColor:"#212F3D", 

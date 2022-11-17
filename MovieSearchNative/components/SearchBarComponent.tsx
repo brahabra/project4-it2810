@@ -29,7 +29,6 @@ export default function SearchBarComponent() {
           },
         },
       },
-      "getSearches",
     ],
   });
 
@@ -49,8 +48,7 @@ export default function SearchBarComponent() {
   const onSubmit = () => {
     if (search.trim().length > 45) {
       alert("Search can not contain more than 45 characters!");
-    }
-    else {
+    } else {
       if (!format.test(search)) {
         addToSearchLog();
       } else {
@@ -59,15 +57,6 @@ export default function SearchBarComponent() {
     }
   };
 
-  // Very hard to find correct type for event.
-  // In this case this does not matter,
-  // because it would not work if you for example put in a string
-  function handleSearch(event: any) {
-    if (search.trim().length == 1 && event.key === "Backspace") {
-      titleSearchedFor("")
-    }
-  }
-
   if (loading) return <Text>Saving search ...</Text>;
   if (error) return <Text>Could not save search ...</Text>;
 
@@ -75,9 +64,8 @@ export default function SearchBarComponent() {
     <SafeAreaView>
       <SearchBar
         placeholder={"Enter movie title ..."}
-        onChangeText={(setSearch)}
+        onChangeText={setSearch}
         onSubmitEditing={onSubmit}
-        onKeyPress={handleSearch}
         onClear={() => titleSearchedFor("")}
         value={search}
         inputContainerStyle={{ backgroundColor: "white", width: 290 }}

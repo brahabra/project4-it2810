@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 20,
   },
-  searchIcon: {
+  historyIcon: {
     marginTop: "auto",
     marginBottom: "auto",
     marginRight: 10
