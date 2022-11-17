@@ -132,7 +132,6 @@ export default function DisplayMovies() {
         <Pagination movieList={movieList} 
                     currentPage={currentPage} 
                     setCurrentPage={setCurrentPage} />
-        MovieSearchNative/components/DisplayMovies.tsx
         </View>
       </>
     );
@@ -145,7 +144,6 @@ export default function DisplayMovies() {
           if (id !== PAGE_OPTIONS.PAGE_SIZE) {
             return <MovieComponent key={id} movie={movie} />;
           }
-        MovieSearchNative/components/DisplayMovies.tsx
         })}
       </ScrollView>
       <View style={styles.pagination}>
