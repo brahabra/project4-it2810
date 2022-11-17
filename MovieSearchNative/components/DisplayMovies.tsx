@@ -63,7 +63,7 @@ export default function DisplayMovies() {
       searchString: title,
       options: {
         offset: currentPage * PAGE_OPTIONS.PAGE_SIZE,
-        limit: PAGE_OPTIONS.PAGE_SIZE,
+        limit: PAGE_OPTIONS.PAGE_SIZE + 1,
         sort: {
           Series_Title: "DESC",
           IMDB_Rating: sort,
@@ -129,10 +129,10 @@ export default function DisplayMovies() {
           </Text>
         </ScrollView>
         <View style={styles.pagination}>
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+        <Pagination movieList={movieList} 
+                    currentPage={currentPage} 
+                    setCurrentPage={setCurrentPage} />
+        MovieSearchNative/components/DisplayMovies.tsx
         </View>
       </>
     );
@@ -142,11 +142,16 @@ export default function DisplayMovies() {
     <>
       <ScrollView>
         {movieList.map((movie: Movie, id) => {
-          return <MovieComponent key={id} movie={movie} />;
+          if (id !== PAGE_OPTIONS.PAGE_SIZE) {
+            return <MovieComponent key={id} movie={movie} />;
+          }
+        MovieSearchNative/components/DisplayMovies.tsx
         })}
       </ScrollView>
       <View style={styles.pagination}>
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <Pagination movieList={movieList} 
+                    currentPage={currentPage} 
+                    setCurrentPage={setCurrentPage} />
       </View>
     </>
   );

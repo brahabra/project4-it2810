@@ -12,14 +12,14 @@ export const styles = StyleSheet.create({
   },
   leftArrowDisabled: {
     marginRight: 50,
-    opacity: 0.1,
+    opacity: 0.0,
   },
   rightArrow: {
     marginLeft: 50,
   },
   rightArrowDisabled: {
     marginLeft: 50,
-    opacity: 0.1,
+    opacity: 0.0,
   },
   pageText: {
     fontSize: 25,
