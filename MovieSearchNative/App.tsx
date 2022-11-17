@@ -1,9 +1,9 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import React, { useState } from "react";
-import { Button, SafeAreaView, View } from "react-native";
+import React from "react";
+import { SafeAreaView, View } from "react-native";
 import FilterByGenre from "./components/FilterByGenre";
 import SortByAttribute from "./components/SortByAttribute";
-import { Octicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
 import DisplaySearches from "./components/DisplaySearches";
 import DisplayMovies from "./components/DisplayMovies";
 import { styles } from "./styles/App";
@@ -11,6 +11,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ExtendedMovieComponent from "./components/ExtendedMovieComponent";
 import SearchBarComponent from "./components/SearchBarComponent";
+import { NativeStackNavigationHelpers } from "@react-navigation/native-stack/lib/typescript/src/types";
 
 const client = new ApolloClient({
   uri: "http://it2810-03.idi.ntnu.no:4000",
@@ -20,12 +21,13 @@ const client = new ApolloClient({
 export default function App() {
   const Stack = createNativeStackNavigator();
 
-  function MainScreen({ navigation }: { navigation: any }) {
+  function MainScreen({ navigation }: { navigation: NativeStackNavigationHelpers }) {
+    
     return (
       <SafeAreaView style={styles.appContainer}>
         <View style={styles.searchBar}>
           <Octicons
-            style={styles.searchIcon}
+            style={styles.historyIcon}
             onPress={() => navigation.navigate("History")}
             name="history"
             size={35}
