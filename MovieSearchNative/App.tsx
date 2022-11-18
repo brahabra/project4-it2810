@@ -14,7 +14,7 @@ import SearchBarComponent from "./components/SearchBarComponent";
 import { NativeStackNavigationHelpers } from "@react-navigation/native-stack/lib/typescript/src/types";
 
 const client = new ApolloClient({
-  uri: "http://it2810-03.idi.ntnu.no:4000",
+  uri: "http://it2810-03s.idi.ntnu.no/graphql",
   cache: new InMemoryCache(),
 });
 
