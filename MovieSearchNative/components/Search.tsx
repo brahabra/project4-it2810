@@ -14,7 +14,7 @@ export default function Search() {
   // String of invalid characters
   const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|<>\/]+/;
 
-  // Createa search
+  // Create a search
   const [addSearch, { loading, error }] = useMutation(CREATE_SEARCHES, {
     refetchQueries: [
       {
@@ -32,7 +32,9 @@ export default function Search() {
     ],
   });
 
-  // Adds the word searched for to the database
+  /**
+   * Adds the word searched for to the database
+   */
   function addToSearchLog() {
     titleSearchedFor(search.trim());
     if (search.trim()) {
@@ -57,9 +59,13 @@ export default function Search() {
     }
   };
 
+  // Placeholder while loading the page.
   if (loading) return <Text>Saving search ...</Text>;
+
+  // Displays error message if query fails.
   if (error) return <Text>Could not save search ...</Text>;
 
+  // Returns searchbar component.
   return (
     <SafeAreaView>
       <SearchBar

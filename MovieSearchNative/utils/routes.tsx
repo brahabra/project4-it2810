@@ -1,5 +1,4 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+// Declare which params each page uses
 export type AppRootParamList = {
   Details: { clickedSeriesTitle: string };
   Home: undefined;

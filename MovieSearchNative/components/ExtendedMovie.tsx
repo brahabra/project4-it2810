@@ -16,6 +16,7 @@ import { toHoursAndMinutes } from "../utils/toHoursAndMinutes";
 export default function ExtendedMovie({ route }: { route: any }) {
   const { clickedSeriesTitle } = route.params;
 
+  // Initializes an empty movie
   let movie: IMovie = {
     Series_Title: "",
     IMDB_Rating: "",
@@ -35,6 +36,7 @@ export default function ExtendedMovie({ route }: { route: any }) {
     Star4: "",
   };
 
+  // Get all the data for the clicked movie
   const { loading, error, data } = useQuery(GET_CLICKED_MOVIE, {
     variables: {
       where: {
@@ -43,6 +45,7 @@ export default function ExtendedMovie({ route }: { route: any }) {
     },
   });
 
+  // Placeholder while loading the page.
   if (loading)
     return (
       <View style={styles.feedbackContainer}>
@@ -55,6 +58,7 @@ export default function ExtendedMovie({ route }: { route: any }) {
       </View>
     );
 
+  // Displays error message if query fails.
   if (error)
     return (
       <View style={styles.feedbackContainer}>
@@ -65,10 +69,12 @@ export default function ExtendedMovie({ route }: { route: any }) {
       </View>
     );
 
+  // Sets the movie initialized at the top to be the clicked movie
   if (data) {
     movie = data.movies[0];
   }
 
+  // Returns view of the full movie view (extended movie).
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.movieContainer}>

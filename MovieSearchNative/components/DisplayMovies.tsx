@@ -32,6 +32,9 @@ export default function DisplayMovies() {
     setCurrentPage(0);
   }, [title, genre, sort]);
 
+  /**
+   * Function that handles which query to use based on fields (standard search, filtered search and sorted search)
+   */
   function setQuery() {
     if (title && !genre) {
       if (sort === "ASC") {
@@ -54,6 +57,7 @@ export default function DisplayMovies() {
     }
   }
 
+  //Queries data using the query gotten from setQuery().
   const { loading, error, data } = useQuery(setQuery(), {
     variables: {
       where: {
@@ -72,6 +76,7 @@ export default function DisplayMovies() {
     },
   });
 
+  // Placeholder while loading the page.
   if (loading)
     return (
       <View style={styles.feedbackContainer}>
@@ -82,6 +87,7 @@ export default function DisplayMovies() {
       </View>
     );
 
+  // Displays error message if query fails.
   if (error)
     return (
       <View style={styles.feedbackContainer}>
@@ -92,6 +98,7 @@ export default function DisplayMovies() {
       </View>
     );
 
+  // Function to determine which list is returned from database, different lists are returned for different queries
   if (data) {
     if (title && !genre) {
       if (sort === "ASC") {
@@ -119,7 +126,7 @@ export default function DisplayMovies() {
       });
     }
   }
-
+  // Function to handle no movies found
   if (movieList.length < 1) {
     return (
       <>
@@ -129,9 +136,11 @@ export default function DisplayMovies() {
           </Text>
         </ScrollView>
         <View style={styles.pagination}>
-        <Pagination listLength={movieList.length} 
-                    currentPage={currentPage} 
-                    setCurrentPage={setCurrentPage} />
+          <Pagination
+            listLength={movieList.length}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </View>
       </>
     );
@@ -147,9 +156,10 @@ export default function DisplayMovies() {
         })}
       </ScrollView>
       <View style={styles.pagination}>
-        <Pagination listLength={movieList.length} 
-                    currentPage={currentPage} 
-                    setCurrentPage={setCurrentPage} 
+        <Pagination
+          listLength={movieList.length}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
       </View>
     </>

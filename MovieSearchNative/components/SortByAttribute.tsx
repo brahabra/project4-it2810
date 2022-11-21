@@ -5,11 +5,13 @@ import { useReactiveVar } from "@apollo/client";
 import { selectedSorting } from "../utils/stateManagement";
 import { styles } from "../styles/SortByAttribute";
 
+//Component for handling selecting sort value
 export default function SortByAttribute() {
   const sortOption = useReactiveVar(selectedSorting);
   const sortList = ["ASC", "DESC"];
   const checkSymbol = " \u2713";
 
+  // returns dropdown meny component.
   return (
     <View>
       <SelectDropdown

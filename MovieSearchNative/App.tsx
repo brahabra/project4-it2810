@@ -19,6 +19,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+/**
+ * Every component is rendered in the app.
+ */
 export default function App() {
   const Stack = createNativeStackNavigator();
 
@@ -30,6 +33,7 @@ export default function App() {
     return (
       <SafeAreaView style={styles.appContainer}>
         <View style={styles.searchBar}>
+          {/*Handle click on history icon*/}
           <Octicons
             style={styles.historyIcon}
             onPress={() => navigation.navigate("History")}
@@ -48,6 +52,9 @@ export default function App() {
     );
   }
 
+  /**
+   * The navigation between differenct screens is defined here.
+   */
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
