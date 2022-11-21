@@ -4,6 +4,7 @@ import { selectedGenre } from "../utils/stateManagement";
 import { useReactiveVar } from "@apollo/client";
 import { styles } from "../styles/FilterByGenre";
 
+// Component for handling filtering genre
 export default function FilterByGenre() {
   const genre = useReactiveVar(selectedGenre);
   const checkSymbol = " \u2713";
@@ -23,6 +24,7 @@ export default function FilterByGenre() {
     "Music",
   ];
 
+  // Returns genre filter component.
   return (
     <View>
       <SelectDropdown
@@ -40,7 +42,7 @@ export default function FilterByGenre() {
         }}
         buttonTextAfterSelection={() => {
           if (genre === "") {
-            return "Select genre"
+            return "Select genre";
           } else {
             return genre + checkSymbol;
           }

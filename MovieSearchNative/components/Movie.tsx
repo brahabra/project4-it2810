@@ -7,12 +7,14 @@ import { useNavigation } from "@react-navigation/native";
 interface Props {
   movie: IMovie;
 }
-
+// Each movie loaded in DisplayMovies. This component shows a limited view of the movie.
 export default function Movie(props: Props) {
   const navigation = useNavigation();
 
+  // Returns the component that display "small" view of a movie.
   return (
     <View style={styles.movieContainer}>
+      {/* When the movie is clicked, load a detailed view of the movie with more data shwon*/}
       <TouchableWithoutFeedback
         onPress={() =>
           navigation.navigate("Details", {

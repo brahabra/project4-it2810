@@ -51,6 +51,8 @@ De ulike sidene kunne vise samme film flere ganger. Dette var ikke noe vi klar o
 
 Dersom man søkte etter en film, og var på f.eks. side 6, så ble ikke brukeren alltid navigert automatisk til første side. Dette kunne føre til at brukeren ikke fikk se de mest relevante filmene først. Nå resettes siden til første side hver gang brukeren enten søker, filtrerer eller sorterer filmer.
 
+Vi prøvde å få implementert at man kan klikke seg til første/siste side. Det går dessverre ikke an å kombinere full-tekst søk med COUNT som ville bety at det ikke ville gå an å sjekke hvor mange søketreff man fikk ved å søke etter tittel. Derfor måtte første og siste side håndteres ved å alltid sjekke om det var på posisjon 0 i data arrayen man mottok fra databasen, eller om det ikke var mer enn limit + 1. Hvis lengden til data arrayen er lik limit betyr det at det ikke finnes flere noder i databasen og man er på siste side. Derfor kan man ikke ha en knapp for å hoppe til første eller siste side. Uten full-tekst søk er det mulig å telle antall treff med "COUNT" i GraphQL og dele tallet på limit og til slutt runde opp. 
+
 ### Testing
 Gruppen har valgt å gjennomføre grundig exploratory testing for å teste applikasjonen. Vi prøvde alle funksjonene i applikasjonen i rollen som bruker for å finne åpenbare feil i programvaren. Det ble ikke implementert komponenttesting og end-to-end-testing i dette prosjektet, grunnet kort tidsfrist til innlevering. Vi fokuserte heller på å gjøre grundig arbeid i resten av applikasjonen.
 

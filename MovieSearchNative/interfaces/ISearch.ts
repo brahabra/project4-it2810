@@ -1,4 +1,4 @@
-export interface Search {
+export interface ISearch {
   title: string;
   created: string;
 }

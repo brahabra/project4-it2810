@@ -9,29 +9,18 @@ interface Props {
   setCurrentPage: (value: number) => void;
 }
 
+// Returns pagination component.
 export default function Pagination(props: Props) {
-
-  function handleLeftClick() {
-    if (props.currentPage > 0) {
-      props.setCurrentPage(props.currentPage - 1);
-    } else {
-      alert("First page is showing");
-    }
-  }
-
-  function handleRightClick() {
-    props.setCurrentPage(props.currentPage + 1);
-  }
-
   return (
     <View style={styles.paginationContainer}>
+      {/*Handle left click*/}
       {props.currentPage > 0 ? (
         <Octicons
           style={styles.leftArrow}
           name="arrow-left"
           size={35}
           color="white"
-          onPress={handleLeftClick}
+          onPress={() => props.setCurrentPage(props.currentPage - 1)}
         />
       ) : (
         <Octicons
@@ -41,14 +30,16 @@ export default function Pagination(props: Props) {
           size={35}
         />
       )}
+      {/* Show current page*/}
       <Text style={styles.pageText}>{props.currentPage + 1}</Text>
-      {props.listLength === (PAGE_OPTIONS.PAGE_SIZE + 1) ? (
+      {/*Handle right click*/}
+      {props.listLength === PAGE_OPTIONS.PAGE_SIZE + 1 ? (
         <Octicons
           style={styles.rightArrow}
           name="arrow-right"
           size={35}
           color="white"
-          onPress={handleRightClick}
+          onPress={() => props.setCurrentPage(props.currentPage + 1)}
         />
       ) : (
         <Octicons
@@ -60,5 +51,4 @@ export default function Pagination(props: Props) {
       )}
     </View>
   );
-
 }
