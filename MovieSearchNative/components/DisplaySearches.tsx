@@ -1,27 +1,42 @@
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  ActivityIndicator
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import { GET_SEARCHES } from "../queries/getSearches";
-import { useQuery } from "@apollo/client";
+import { useQuery, useReactiveVar } from "@apollo/client";
 import { PAGE_OPTIONS } from "../utils/enum";
-import { titleSearchedFor } from "../utils/stateManagement";
+import { selectedSorting, titleSearchedFor } from "../utils/stateManagement";
 import { Octicons } from "@expo/vector-icons";
 import { styles } from "../styles/DisplaySearches";
 import { useNavigation } from "@react-navigation/native";
+import Pagination from "./Pagination";
+import { Search } from "../interfaces/Search";
+import SortByAttribute from "./SortByAttribute";
+import SearchComponent from "./SearchComponent";
 
 export default function DisplaySearches() {
+  const [currentPage, setCurrentPage] = useState(0);
+  const sort = useReactiveVar(selectedSorting);
   const navigation = useNavigation();
+  const searchList: Search[] = [];
 
   const { data, loading, error } = useQuery(GET_SEARCHES, {
     variables: {
       options: {
-        offset: 0,
-        limit: PAGE_OPTIONS.SEARCHES_SIZE,
+        offset: currentPage * PAGE_OPTIONS.PAGE_SIZE,
+        limit: PAGE_OPTIONS.SEARCHES_SIZE + 1,
         sort: {
-          created: "DESC",
+          created: sort,
         },
       },
     },
   });
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [sort]);
 
   function handleSearchWordClick(clickedSearchWord: string) {
     titleSearchedFor(clickedSearchWord);
@@ -50,39 +65,57 @@ export default function DisplaySearches() {
       </View>
     );
 
-  // If we have searches, view the searches. The search word and when it was searched after is showing.
-  function showSearches() {
-    return data?.searches.map(
-      ({ title, created }: { title: string; created: string }) => (
-        <View style={styles.searchesContainer} key={created}>
-          <Octicons
-            style={styles.searchIcon}
-            name="search"
-            size={15}
-            color="white"
-            onPress={() => handleSearchWordClick(title)}
-          />
-          <TouchableOpacity onPress={() => handleSearchWordClick(title)}>
-            <Text style={styles.searchesText}>
-              {title} {created.slice(0, 10)}
-            </Text>
-          </TouchableOpacity>
+  if (data) {
+    data.searches.forEach((search: Search) => {
+      searchList.push(search);
+    });
+  }
+
+  if (searchList.length < 1) {
+    return (
+      <>
+        <View style={styles.displaySearchesContainer}>
+          <Text style={styles.displaySearchesHeader}>
+            Searches
+          </Text>
+          {/*If we have data, show the data. If not, show feedback to the user */}
+          <Text>No searches found!</Text>
         </View>
-      )
+        <View style={styles.pagination}>
+          <Pagination
+            listLength={searchList.length}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </View>
+      </>
     );
   }
 
   return (
     <View style={styles.displaySearchesContainer}>
-      <Text style={styles.displaySearchesHeader}>
-        Showing the last {PAGE_OPTIONS.SEARCHES_SIZE} searches
-      </Text>
-      {/*If we have data, show the data. If not, show feedback to the user */}
-      {data.searches.length > 0 ? (
-        showSearches()
-      ) : (
-        <Text>No searches registered!</Text>
-      )}
+      <View>
+        <Text style={styles.displaySearchesHeader}>
+          Showing most recent searches
+        </Text>
+        <View style={styles.sort}>
+        <SortByAttribute />
+        </View>
+        {/*If we have data, show the data. If not, show feedback to the user */}
+        {searchList.map((search: Search, id) => {
+          if (id !== PAGE_OPTIONS.PAGE_SIZE) {
+            return(
+            <SearchComponent key={id} search={search} handleSearchWordClick={handleSearchWordClick}/>
+        )}
+          })}
+      </View>
+      <View style={styles.pagination}>
+        <Pagination
+          listLength={searchList.length}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </View>
     </View>
   );
 }

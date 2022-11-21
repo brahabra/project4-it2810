@@ -22,7 +22,7 @@ export default function Search() {
         variables: {
           options: {
             offset: 0,
-            limit: PAGE_OPTIONS.SEARCHES_SIZE,
+            limit: PAGE_OPTIONS.SEARCHES_SIZE + 1,
             sort: {
               created: "DESC",
             },

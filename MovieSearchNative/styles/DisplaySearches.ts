@@ -1,9 +1,17 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  pagination: {
+    marginBottom: 30,
+    flex: 1,
+    justifyContent: "flex-end"
+  },
+  sort: {
+    alignItems: "center"
+  },
   feedbackSearchesContainer: {
     backgroundColor:"#212F3D", 
-    flex: 1,
+    flex: 1
   },
   errorSearchesFeedback: {
     alignItems: "center",
@@ -20,14 +28,14 @@ export const styles = StyleSheet.create({
     marginTop: 20
   },
   searchesContainer: {
-    marginVertical: 20,
+    marginVertical: 17,
     marginHorizontal: "auto",
     justifyContent: "center",
     flexDirection: "row",
   },
   displaySearchesContainer: { 
     backgroundColor: "#212F3D",
-    flex: 1
+    flex: 1,
   },
   displaySearchesHeader: {
     fontWeight: "bold",
