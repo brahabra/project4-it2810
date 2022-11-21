@@ -3,12 +3,12 @@
 
 
 ## Hvordan Kjøre Prosjektet
-Markup : - Installer og sett opp enten iOS simulator (via Xcode) eller Android simulator (via Android Studio). 
-Markup : - Klon prosjektet fra: https://gitlab.stud.idi.ntnu.no/it2810-h22/Team-3/project4.git 
-Markup : - Naviger til ~/project4/MovieSearchNative/ i terminal
-Markup : - Kjør kommando `npm i` i terminal
-Markup : - Kjør kommando `npm start` i terminal
-Markup : - Trykk `i` for iOS simulator eller `a` for Android simulator i terminalen
+- Installer og sett opp enten iOS simulator (via Xcode) eller Android simulator (via Android Studio). 
+- Klon prosjektet fra: https://gitlab.stud.idi.ntnu.no/it2810-h22/Team-3/project4.git 
+- Naviger til ~/project4/MovieSearchNative/ i terminal
+- Kjør kommando `npm i` i terminal
+- Kjør kommando `npm start` i terminal
+- Trykk `i` for iOS simulator eller `a` for Android simulator i terminalen
 
 ## Dokumentasjon
 
