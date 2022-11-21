@@ -2,91 +2,62 @@
 
 
 
-## Getting started
+## Hvordan Kjøre Prosjektet
+Markup : - Installer og sett opp enten iOS simulator (via Xcode) eller Android simulator (via Android Studio). 
+Markup : - Klon prosjektet fra: https://gitlab.stud.idi.ntnu.no/it2810-h22/Team-3/project4.git 
+Markup : - Naviger til ~/project4/MovieSearchNative/ i terminal
+Markup : - Kjør kommando `npm i` i terminal
+Markup : - Kjør kommando `npm start` i terminal
+Markup : - Trykk `i` for iOS simulator eller `a` for Android simulator i terminalen
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Dokumentasjon
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### React Native
+Vi brukte React Native for å gjenskape funksjonaliteten til prosjekt 3 slik at vi har en mobilapplikasjon versjon av prosjekt 3, samt noen utvidelser. Vi brukte Expo sammen med React Native for å unngå å skrive “duplikat-kode”. Expo tillater utvikleren å skrive koden til applikasjonen et sted i prosjektet, fremfor å måtte skrive en versjon for hver mobilplattform (dermed “duplikat-kode”). Expo oversetter altså koden til komponenten til riktig versjon basert på operativsystemet som brukeren kjører applikasjonen i.
 
-## Add your files
+### Backend
+Har gjort ingen endringer til backend for applikasjonen utenom å få overført porten slik at man kan koble til databasen uten å være på NTNU sitt nett.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+### Bruk av komponenter
+Vi innså at i prosjekt 3 hadde vi brukt App.tsx noe feil, som sørget for at vi hadde mange unødvendige rerenderinger av komponentene våres. I prosjekt 3 hadde vi en fil kalt MovieSearch.tsx der alle komponentene på appen var plassert i returnen til MovieSearch. Dersom MovieSearch rerendret, sørget vårt gamle oppsett at alle andre komponenter også rerendret. Det betyr at mange av komponentene ble rerendret selv om de ikke endret state. Nå er komponentene mer uavhengig av hverandre, noe som sørger for færre rerendringer.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.stud.idi.ntnu.no/it2810-h22/Team-3/project4.git
-git branch -M main
-git push -uf origin main
-```
+### Simulering av bruker
+Applikasjonen simulerer at brukeren er alltid logget inn, slik at det ikke var nødvendig for de som skulle vurdere oss å lage en ny bruker for å se applikasjonen. 
 
-## Integrate with your tools
+Vi lagrer søkene brukeren gjør i en egen logg. Her kan brukeren se de siste søkene kronologisk, og når man klikker på et søk, så gjøres søket på nytt igjen. 
 
-- [ ] [Set up project integrations](https://gitlab.stud.idi.ntnu.no/it2810-h22/Team-3/project4/-/settings/integrations)
+### Søkefunksjonalitet
+Søkefunksjonaliteten er lik som i prosjekt 3, slik at bruker kan søke med full-tekst søk (vha. Apache Lucene og Cypher) og sjanger.
 
-## Collaborate with your team
+Vi lagrer tittelen bruker søker etter, valgt sjanger og valgt sortering i Apollo sin Local State Management. Slik kan vi bruke disse variablene i hele appen, og slippe å sende disse videre som props.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Vi har lagt til mulighet for å sortere søkehistorikk etter dato, slik at bruker kan se nyeste og eldste søk enkelt. Vi valgte å ikke legge til filtrering for søkehistorikk da vi opplevde det ikke som hensiktsmessig å eventuelt filtrere etter dato. Man kan ennå filtrere filmsøk etter sjanger og sortere etter IMDB Rating (men er alltid sortert etter relevans hvis et søk er gjort med full-tekst søk). 
 
-## Test and Deploy
+### Styling
+For å sikre ryddighet i koden vår har vi hatt en egen “styles” mappe for styling. Alle disse filene i denne mappen er “ts” filer og ikke “tsx”, fordi de kun bruker TypeScript og ikke tsx.
 
-Use the built-in continuous integration in GitLab.
+Vi valgte å bruke samme fargene i appen som på nettsiden, for å skape kontinuitet mellom plattformene. Fargene viser et mørkt tema slik som på nettsiden. Vi valgte mørkt tema på nettsiden i henhold til bærekraftig design. 
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### Utformingsvalg
+Vi valgte å bruke et standard historikk-ikon til å linke til historikksiden, fremfor å bruke ikon og tekst sammen. Vi brukte også standard pil-ikoner til å linke til forrige og neste side av listen med filmer hentet fra databasen. Dette er fordi mobilskjermen har begrenset plass, som gjør det mer brukervennlig å bruke ikoner fremfor tekst. For filtrering og sortering valgte vi å kun vise tekst som sier kategorien som er valgt (for eksempel “drama” framfor “kategori: drama”), og hvilken rekkefølge listen er sortert etter (for eksempel “ASC” framfor “sortert etter: ASC”). Dette gjorde vi også for å spare plass. Når brukeren laster inn appen sier feltet for kategori “Select genre”, og feltet for sortering sier “Sort by …”. Dette forteller brukeren hva disse feltene er, slik at brukeren skjønner hva feltene er fra starten.
 
-***
+### Detaljert visning av film 
+Når en film klikkes på, så blir brukeren navigert til en egen side hvor den aktuelle filmen vises mer detaljert. Her kan brukeren klikke seg tilbake for å se hele listen med filmer som er lastet inn. Fra forrige gang har vi utviklet måten vi laster inn data på. Nå laster vi ikke inn all informasjonen til en film før den klikkes på. Før en film klikkes på har den derfor kun lastet inn dataen som vises til brukeren, og når den filmen blir klikket på gjøres det en query etter enda mer info om filmen. 
 
-# Editing this README
+### Pagination
+Vi har lagt til paginering på komponenten for søkehistorikk slik at brukeren kan se alle sine søk. Dette var tidligere ikke mulig som førte til at mange søk ble lagret men var ikke tilgjengelig for brukeren. Vi hadde valget mellom å kunne lagre de siste 10 søkene eller gjøre alle tilgjengelig og da valgte vi at alle søk var tilgjengelig. 
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+De ulike sidene kunne vise samme film flere ganger. Dette var ikke noe vi klar over da vi leverte, og det viste seg at det var en bug i GraphQL-biblioteket. Dette har vi nå fått fikset.
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Dersom man søkte etter en film, og var på f.eks. side 6, så ble ikke brukeren alltid navigert automatisk til første side. Dette kunne føre til at brukeren ikke fikk se de mest relevante filmene først. Nå resettes siden til første side hver gang brukeren enten søker, filtrerer eller sorterer filmer.
 
-## Name
-Choose a self-explaining name for your project.
+### Testing
+Gruppen har valgt å gjennomføre grundig exploratory testing for å teste applikasjonen. Vi prøvde alle funksjonene i applikasjonen i rollen som bruker for å finne åpenbare feil i programvaren. Det ble ikke implementert komponenttesting og end-to-end-testing i dette prosjektet, grunnet kort tidsfrist til innlevering. Vi fokuserte heller på å gjøre grundig arbeid i resten av applikasjonen.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+For å sikre brukervennligheten i applikasjonen utførte vi brukertester på bekjente. Ut ifra dette gjorde vi endringer i searchbaren vår. En endring var å flytte søk-ikonet inn i selve searchbaren istedenfor å ha det utenfor som vi hadde før. Vi vurderte også å legge til automatisk søk, altså at det gjøres et søk hver gang brukeren taster inn en bokstav. Etter litt diskusjon kom vi fram til at dette ikke ville være smart, da man ville få altfor mye data i search history.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+En annen endring var at vi implementerte at man resetter søket dersom man trykker på kryssknappen i searchbaren. Dette gjorde vi fordi flere brukere slet med å finne tilbake til alle filmene dersom de hadde gjennomført et søk.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Gitlab
+Vi har brukt Gitlab og Git i utviklingen av appen vår. Hver commit-melding starter med en “#” som viser hvilket issue/branch commiten er koblet til. Vi har hatt fokus på å lage gode og beskrivende issues slik at alle gruppemedlemmene enkelt kan se hvilke arbeidsoppgaver som må gjøres.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
