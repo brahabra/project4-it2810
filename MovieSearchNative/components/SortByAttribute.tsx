@@ -18,13 +18,13 @@ export default function SortByAttribute() {
         buttonStyle={styles.sortButton}
         data={sortList}
         defaultButtonText={"Sort by ..."}
-        onSelect={(selectedItem, index) => {
+        onSelect={(selectedItem) => {
           selectedSorting(selectedItem);
         }}
         buttonTextAfterSelection={() => {
           return sortOption + checkSymbol;
         }}
-        rowTextForSelection={(item, index) => {
+        rowTextForSelection={(item) => {
           if (item === sortOption) {
             return item + checkSymbol;
           } else {

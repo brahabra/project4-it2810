@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Movie } from "../interfaces/Movie";
-import MovieComponent from "./MovieComponent";
+import { IMovie } from "../interfaces/IMovie";
+import Movie from "./Movie";
 import { useQuery, useReactiveVar } from "@apollo/client";
 import {
   GET_ALL_MOVIES,
@@ -23,7 +23,7 @@ import { Octicons } from "@expo/vector-icons";
 
 export default function DisplayMovies() {
   const [currentPage, setCurrentPage] = useState(0);
-  const movieList: Movie[] = [];
+  const movieList: IMovie[] = [];
   const title = useReactiveVar(titleSearchedFor);
   const genre = useReactiveVar(selectedGenre);
   const sort = useReactiveVar(selectedSorting);
@@ -95,26 +95,26 @@ export default function DisplayMovies() {
   if (data) {
     if (title && !genre) {
       if (sort === "ASC") {
-        data.findMovieByTitleASC.forEach((movie: Movie) => {
+        data.findMovieByTitleASC.forEach((movie: IMovie) => {
           movieList.push(movie);
         });
       } else {
-        data.findMovieByTitleDESC.forEach((movie: Movie) => {
+        data.findMovieByTitleDESC.forEach((movie: IMovie) => {
           movieList.push(movie);
         });
       }
     } else if (title && genre) {
       if (sort === "ASC") {
-        data.findMovieByTitleWithGenreFilterASC.forEach((movie: Movie) => {
+        data.findMovieByTitleWithGenreFilterASC.forEach((movie: IMovie) => {
           movieList.push(movie);
         });
       } else {
-        data.findMovieByTitleWithGenreFilterDESC.forEach((movie: Movie) => {
+        data.findMovieByTitleWithGenreFilterDESC.forEach((movie: IMovie) => {
           movieList.push(movie);
         });
       }
     } else {
-      data.movies.forEach((movie: Movie) => {
+      data.movies.forEach((movie: IMovie) => {
         movieList.push(movie);
       });
     }
@@ -140,9 +140,9 @@ export default function DisplayMovies() {
   return (
     <>
       <ScrollView>
-        {movieList.map((movie: Movie, id) => {
+        {movieList.map((movie: IMovie, id) => {
           if (id !== PAGE_OPTIONS.PAGE_SIZE) {
-            return <MovieComponent key={id} movie={movie} />;
+            return <Movie key={id} movie={movie} />;
           }
         })}
       </ScrollView>

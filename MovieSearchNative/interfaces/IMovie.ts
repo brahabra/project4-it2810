@@ -1,4 +1,4 @@
-export interface Movie {
+export interface IMovie {
   Series_Title: string;
   IMDB_Rating: string;
   Released_Year: string;

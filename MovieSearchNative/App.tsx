@@ -9,8 +9,8 @@ import DisplayMovies from "./components/DisplayMovies";
 import { styles } from "./styles/App";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ExtendedMovieComponent from "./components/ExtendedMovieComponent";
-import SearchBarComponent from "./components/SearchBarComponent";
+import ExtendedMovie from "./components/ExtendedMovie";
+import Search from "./components/Search";
 import { NativeStackNavigationHelpers } from "@react-navigation/native-stack/lib/typescript/src/types";
 
 const client = new ApolloClient({
@@ -33,7 +33,7 @@ export default function App() {
             size={35}
             color="white"
           />
-          <SearchBarComponent />
+          <Search />
         </View>
         <View style={styles.filterAndSortContainer}>
           <FilterByGenre />
@@ -59,7 +59,7 @@ export default function App() {
           }}
         >
           <Stack.Screen name="Home" component={MainScreen} />
-          <Stack.Screen name="Details" component={ExtendedMovieComponent} />
+          <Stack.Screen name="Details" component={ExtendedMovie} />
           <Stack.Screen name="History" component={DisplaySearches} />
         </Stack.Navigator>
       </NavigationContainer>
