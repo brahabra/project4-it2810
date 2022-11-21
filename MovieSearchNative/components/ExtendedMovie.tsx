@@ -6,17 +6,17 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React from "react";
-import { styles } from "../styles/ExtendedMovieComponent";
+import { styles } from "../styles/ExtendedMovie";
 import { useQuery } from "@apollo/client";
 import { GET_CLICKED_MOVIE } from "../queries/getMovies";
-import { Movie } from "../interfaces/Movie";
+import { IMovie } from "../interfaces/IMovie";
 import { Octicons } from "@expo/vector-icons";
 import { toHoursAndMinutes } from "../utils/toHoursAndMinutes";
 
-export default function ExtendedMovieComponent({ route }: { route: any }) {
+export default function ExtendedMovie({ route }: { route: any }) {
   const { clickedSeriesTitle } = route.params;
 
-  let movie: Movie = {
+  let movie: IMovie = {
     Series_Title: "",
     IMDB_Rating: "",
     Released_Year: "",

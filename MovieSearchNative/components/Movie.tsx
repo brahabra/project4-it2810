@@ -1,14 +1,14 @@
 import { View, Text, TouchableWithoutFeedback } from "react-native";
-import React, { useState } from "react";
-import { Movie } from "../interfaces/Movie";
-import { styles } from "../styles/MovieComponent";
+import React from "react";
+import { IMovie } from "../interfaces/IMovie";
+import { styles } from "../styles/Movie";
 import { useNavigation } from "@react-navigation/native";
 
 interface Props {
-  movie: Movie;
+  movie: IMovie;
 }
 
-export default function MovieComponent(props: Props) {
+export default function Movie(props: Props) {
   const navigation = useNavigation();
 
   return (
