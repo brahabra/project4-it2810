@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   filterButton: {
-    backgroundColor: "white",
+    backgroundColor: "#eaecee",
     marginTop: 5,
     height: 40,
     width: 140,

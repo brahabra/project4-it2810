@@ -13,6 +13,7 @@ import Search from "./components/Search";
 import SortByAttribute from "./components/SortByAttribute";
 import { styles } from "./styles/App";
 
+
 const client = new ApolloClient({
   uri: "http://it2810-03s.idi.ntnu.no/graphql",
   cache: new InMemoryCache(),
