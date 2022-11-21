@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, NativeMouseEvent } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import React, { useState } from "react";
 import { titleSearchedFor } from "../utils/stateManagement";
 import { GET_SEARCHES } from "../queries/getSearches";
@@ -7,7 +7,7 @@ import { CREATE_SEARCHES } from "../queries/createSearches";
 import { PAGE_OPTIONS } from "../utils/enum";
 import { SearchBar } from "@rneui/themed";
 
-export default function SearchBarComponent() {
+export default function Search() {
   const [search, setSearch] = useState("");
   const d = new Date();
 
