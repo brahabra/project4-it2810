@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   sortButton: {
-    backgroundColor: "white",
+    backgroundColor: "#d5d8dc",
     marginLeft: "auto",
     marginRight: 10,
     marginTop: 5,
