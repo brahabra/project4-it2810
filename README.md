@@ -1,7 +1,3 @@
-# project4
-
-
-
 ## Hvordan Kjøre Prosjektet
 - Installer og sett opp enten iOS simulator (via Xcode) eller Android simulator (via Android Studio). 
 - Klon prosjektet fra: https://gitlab.stud.idi.ntnu.no/it2810-h22/Team-3/project4.git 
