@@ -1,11 +1,10 @@
 import { View, Text } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import { styles } from "../styles/Pagination";
-import { Movie } from "../interfaces/Movie";
 import { PAGE_OPTIONS } from "../utils/enum";
 
 interface Props {
-  movieList: Movie[];
+  listLength: number;
   currentPage: number;
   setCurrentPage: (value: number) => void;
 }
@@ -22,13 +21,6 @@ export default function Pagination(props: Props) {
 
   function handleRightClick() {
     props.setCurrentPage(props.currentPage + 1);
-    /*   TODO: Handle showing last page when Apollo data is connected
-    
-    if (props.currentPage < 10) {
-      props.setCurrentPage(props.currentPage + 1);
-    } else {
-      alert("Last page is showing");
-    }*/
   }
 
   return (
@@ -50,8 +42,7 @@ export default function Pagination(props: Props) {
         />
       )}
       <Text style={styles.pageText}>{props.currentPage + 1}</Text>
-      {/* TODO: Handle showing last page when Apollo data is connected: */}
-      {props.movieList.length === (PAGE_OPTIONS.PAGE_SIZE + 1) ? (
+      {props.listLength === (PAGE_OPTIONS.PAGE_SIZE + 1) ? (
         <Octicons
           style={styles.rightArrow}
           name="arrow-right"

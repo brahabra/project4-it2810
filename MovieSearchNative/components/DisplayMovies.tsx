@@ -129,7 +129,7 @@ export default function DisplayMovies() {
           </Text>
         </ScrollView>
         <View style={styles.pagination}>
-        <Pagination movieList={movieList} 
+        <Pagination listLength={movieList.length} 
                     currentPage={currentPage} 
                     setCurrentPage={setCurrentPage} />
         </View>
@@ -147,9 +147,10 @@ export default function DisplayMovies() {
         })}
       </ScrollView>
       <View style={styles.pagination}>
-        <Pagination movieList={movieList} 
+        <Pagination listLength={movieList.length} 
                     currentPage={currentPage} 
-                    setCurrentPage={setCurrentPage} />
+                    setCurrentPage={setCurrentPage} 
+        />
       </View>
     </>
   );
