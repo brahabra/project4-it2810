@@ -59,3 +59,10 @@ En annen endring var at vi implementerte at man resetter søket dersom man trykk
 ### Gitlab
 Vi har brukt Gitlab og Git i utviklingen av appen vår. Hver commit-melding starter med en “#” som viser hvilket issue/branch commiten er koblet til. Vi har hatt fokus på å lage gode og beskrivende issues slik at alle gruppemedlemmene enkelt kan se hvilke arbeidsoppgaver som må gjøres.
 
+
+### Bilder av appen
+
+![home screen](MovieSearchNative/assets/pic1.png)
+![search for movie](MovieSearchNative/assets/pic2.png)
+![detailed movie](MovieSearchNative/assets/pic4.png)
+![history log](MovieSearchNative/assets/pic3.png)
